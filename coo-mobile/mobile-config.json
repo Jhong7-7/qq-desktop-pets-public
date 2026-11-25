@@ -1,0 +1,11 @@
+{
+  "created": "2026-11-06",
+  "bind": "0.0.0.0",
+  "pet_port": 7797,
+  "core_port": 17788,
+  "core_exposed": false,
+  "token": "YOUR_ACCESS_TOKEN_HERE",
+  "lan_ip_at_creation": "192.0.2.100",
+  "phone_url": "http://192.0.2.100:7797/pet?m=YOUR_ACCESS_TOKEN_HERE",
+  "note": "LAN IP may change on DHCP. start-mobile.cmd prints the current URL."
+}

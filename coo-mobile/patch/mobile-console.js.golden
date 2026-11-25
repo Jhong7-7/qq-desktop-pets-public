@@ -1,0 +1,449 @@
+/**
+ * Phone console for Coo. Talks only to this server's /api/m/* whitelist,
+ * which proxies a narrow set of Core Web UI endpoints over loopback.
+ * No external assets, no framework: the pages' CSP allows same-origin only.
+ */
+const $ = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+const ICONS = {
+  'desktop-pet': '🐾', console: '💬', coopanion: '🔔', 'gpt-sovits': '🎙️', rvc: '🎵',
+  qq: '🐧', qzone: '⭐', clock: '⏰', memory: '🧠', mood: '🌤️', songs: '🎶',
+  image: '🖼️', websearch: '🔍', webpro: '🌐', 'bilibili-video': '📺', bottle: '🍾',
+  'daily-life': '📔', greetings: '👋', selftalk: '💭', starpost: '✨', house: '🏠',
+  terrarium: '🪴', parlor: '🛋️', tokens: '🎟️', bloom: '🌸', 'art-styles': '🎨', tts: '🔊',
+};
+const STATUS = { active: '运行中', inactive: '未启用', missing: '缺失' };
+const SENSITIVE_KEY = /secret|password|token|apikey|credential|privatekey/i;
+const SENSITIVE_GROUP = /connection|secret|credential/i;
+
+const state = { worlds: [], groups: [], worldQuery: '', configQuery: '', busy: new Set(), openGroups: new Set() };
+let toastTimer = null;
+let dialogResolve = null;
+
+/* ------------------------------ plumbing ------------------------------ */
+
+/* A home-screen WebClip may have its own cookie jar. Remember the entry token
+   so an expired/missing cookie can heal itself instead of showing a dead app. */
+const TOKEN_KEY = 'coopanion_mobile_token';
+const entryToken = new URLSearchParams(location.search).get('m');
+if (entryToken) {
+  try { localStorage.setItem(TOKEN_KEY, entryToken); } catch { /* private mode */ }
+}
+function storedToken() {
+  try { return localStorage.getItem(TOKEN_KEY) || ''; } catch { return ''; }
+}
+function relaunchWithToken() {
+  const token = storedToken();
+  if (!token) return false;
+  try {
+    if (sessionStorage.getItem('coo_relaunched')) return false;
+    sessionStorage.setItem('coo_relaunched', '1');
+  } catch { /* ignore */ }
+  const u = new URL(location.href);
+  u.searchParams.set('m', token);
+  location.replace(u.toString());
+  return true;
+}
+
+async function api(path, opts = {}) {
+  const res = await fetch(path, { headers: { 'Content-Type': 'application/json' }, ...opts });
+  if (res.status === 421) {
+    if (relaunchWithToken()) throw new Error('正在恢复访问…');
+    throw new Error('访问令牌已失效，请从最新通知重新打开');
+  }
+  if (!res.ok) {
+    let message = '';
+    try { message = (await res.json()).error || ''; } catch { /* not json */ }
+    throw new Error(message || `HTTP ${res.status}`);
+  }
+  return res.json();
+}
+
+function toast(message, bad = false) {
+  const el = $('#toast');
+  el.textContent = message;
+  el.className = 'toast show' + (bad ? ' bad' : '');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { el.className = 'toast'; }, 2600);
+}
+
+function ask(title, body, danger = false) {
+  return new Promise((resolve) => {
+    $('#dlgTitle').textContent = title;
+    $('#dlgBody').textContent = body;
+    $('#dlgOk').className = 'btn ' + (danger ? 'danger' : 'primary');
+    $('#mask').classList.add('show');
+    dialogResolve = resolve;
+  });
+}
+function finishAsk(value) {
+  $('#mask').classList.remove('show');
+  const resolve = dialogResolve;
+  dialogResolve = null;
+  if (resolve) resolve(value);
+}
+
+async function load() {
+  try {
+    const [worlds, config] = await Promise.all([api('/api/m/worlds'), api('/api/m/config')]);
+    state.worlds = worlds.worlds || [];
+    state.groups = (config.groups || []).filter((g) => !SENSITIVE_GROUP.test(g.group?.id || ''));
+    const active = state.worlds.filter((w) => w.status === 'active').length;
+    $('#subtitle').textContent = `已连接 · ${active} 个 World 运行中`;
+    $('#aboutState').textContent = '桌面 Core 在线';
+    $('#aboutWorlds').textContent = String(state.worlds.length);
+    $('#aboutGroups').textContent = String(state.groups.length);
+    $('#aboutHost').textContent = location.host;
+    renderWorlds();
+    renderConfig();
+  } catch (err) {
+    $('#subtitle').textContent = '连接失败';
+    $('#aboutState').textContent = '连接失败';
+    $('#worldList').innerHTML = emptyState('连不上桌面的 Coo', '确认电脑上的 Coopanion 正在运行，然后点右上角刷新。');
+    toast('加载失败：' + err.message, true);
+  }
+}
+
+function emptyState(title, body) {
+  return `<div class="empty"><span class="big">🫧</span>${esc(title)}<br><span style="font-size:12px">${esc(body)}</span></div>`;
+}
+
+/* ------------------------------- worlds ------------------------------- */
+
+function worldCard(w) {
+  const on = w.status === 'active';
+  const missing = w.status === 'missing';
+  const name = w.label || w.id;
+  const lamps = (w.lamps || []).map((l) => {
+    const s = ['online', 'offline', 'busy'].includes(l.state) ? l.state : '';
+    return `<span class="lamp ${s}">${esc(l.label)}${l.hint ? ' · ' + esc(l.hint) : ''}</span>`;
+  }).join('');
+  const badges = (w.badges || []).map((b) => `<span class="tag">${esc(b.label)} ${esc(b.value ?? '')}</span>`).join('');
+  const tools = (w.tools || []).map((t) => `<span class="tool-chip">${esc(t)}</span>`).join('');
+  return `
+<article class="card world" data-id="${esc(w.id)}">
+  <div class="world-head">
+    <div class="world-icon">${ICONS[w.id] || '🧩'}</div>
+    <div class="world-meta">
+      <div class="world-name">${esc(name)}</div>
+      <div class="world-id">${esc(w.id)}</div>
+    </div>
+    <label class="switch" title="启用 / 停用">
+      <input type="checkbox" data-act="activation" ${on ? 'checked' : ''} ${missing ? 'disabled' : ''}>
+      <span class="slider"></span>
+    </label>
+  </div>
+  <div class="world-tags">
+    <span class="badge ${esc(w.status)}">${STATUS[w.status] || esc(w.status)}</span>
+    ${w.tools?.length ? `<span class="tag">${w.tools.length} 个工具</span>` : ''}
+    ${w.declared === false ? '<span class="tag">未声明</span>' : ''}
+    ${w.prefixDrifted ? '<span class="tag warn">前缀待重载</span>' : ''}
+    ${badges}
+  </div>
+  ${lamps ? `<div class="lamps">${lamps}</div>` : ''}
+  <div class="world-foot">
+    <label class="mini-toggle">
+      <input type="checkbox" data-act="visibility" ${w.visible !== false ? 'checked' : ''} ${on ? '' : 'disabled'}>
+      <span>对 Coo 可见</span>
+    </label>
+    <div class="world-actions">
+      ${on ? '<button class="btn tiny" data-act="restart">重启</button>' : ''}
+      <button class="btn tiny ghost" data-act="detail">详情</button>
+    </div>
+  </div>
+  <div class="world-detail" hidden>
+    ${w.workspace ? `<div class="detail-row"><b>目录</b> ${esc(w.workspace)}</div>` : ''}
+    ${w.reason ? `<div class="detail-row"><b>说明</b> ${esc(w.reason)}</div>` : ''}
+    ${tools ? `<div class="detail-row"><b>工具</b><div class="tool-chips">${tools}</div></div>` : ''}
+    ${w.envPrompt ? `<div class="detail-row"><b>环境提示</b> ${esc(String(w.envPrompt).slice(0, 220))}${String(w.envPrompt).length > 220 ? '…' : ''}</div>` : ''}
+  </div>
+</article>`;
+}
+
+function renderWorlds() {
+  const q = state.worldQuery.trim().toLowerCase();
+  const list = state.worlds
+    .filter((w) => !q || `${w.label || ''} ${w.id}`.toLowerCase().includes(q))
+    .sort((a, b) => (a.status === 'active' ? 0 : 1) - (b.status === 'active' ? 0 : 1)
+      || String(a.label || a.id).localeCompare(String(b.label || b.id), 'zh'));
+  const active = state.worlds.filter((w) => w.status === 'active').length;
+  const visible = state.worlds.filter((w) => w.status === 'active' && w.visible !== false).length;
+  $('#stats').innerHTML = `
+    <div class="stat"><b>${active}</b><span>运行中</span></div>
+    <div class="stat"><b>${visible}</b><span>对 Coo 可见</span></div>
+    <div class="stat"><b>${state.worlds.length}</b><span>World 总数</span></div>`;
+  $('#worldList').innerHTML = list.length
+    ? list.map(worldCard).join('')
+    : emptyState('没有匹配的 World', '换个关键词试试。');
+}
+
+async function changeWorld(id, action, value, el) {
+  const key = `${id}:${action}`;
+  if (state.busy.has(key)) return;
+  const card = el.closest('.card');
+  const name = $('.world-name', card)?.textContent || id;
+  if (action === 'activation' && !value) {
+    const ok = await ask(`停用「${name}」？`, 'Coo 会立刻失去这个 World 的能力，随时可以再打开。', true);
+    if (!ok) { el.checked = true; return; }
+  }
+  state.busy.add(key);
+  toast(action === 'activation' ? (value ? '正在启用…' : '正在停用…') : '正在更新…');
+  try {
+    const body = action === 'activation' ? { id, enabled: value } : { id, visible: value };
+    await api(`/api/m/worlds/${action}`, { method: 'POST', body: JSON.stringify(body) });
+    toast('已更新');
+    await load();
+  } catch (err) {
+    el.checked = !value;
+    toast('操作失败：' + err.message, true);
+  } finally {
+    state.busy.delete(key);
+  }
+}
+
+async function restartWorld(id, name) {
+  const ok = await ask(`重启「${name}」？`, id === 'desktop-pet'
+    ? '桌宠服务会短暂断开，页面可能掉线几秒；等它回来后刷新即可。'
+    : '这个 World 会停下并按当前配置重新启动。');
+  if (!ok) return;
+  toast('正在重启…');
+  try {
+    await api('/api/m/worlds/restart', { method: 'POST', body: JSON.stringify({ id }) });
+    toast('已重启，正在刷新…');
+  } catch (err) {
+    toast('重启请求未确认：' + err.message, true);
+  }
+  setTimeout(() => { void load(); }, 3000);
+}
+
+/* ------------------------------ settings ------------------------------ */
+
+function categoryOf(group) {
+  const id = group.group?.id || '';
+  if (['core', 'companion', 'cormini'].includes(id)) return '核心';
+  if (id.startsWith('world:desktop-pet')) return '桌宠';
+  if (id.startsWith('world:')) return '其他 World';
+  return '模型与高级';
+}
+
+function fieldHtml(key, schema, value) {
+  const type = schema.type || 'string';
+  const title = schema.title || key.split('.').pop();
+  const hot = schema['x-hot'] !== false;
+  const desc = schema.description ? `<div class="field-desc">${esc(schema.description)}</div>` : '';
+  const chip = hot ? '' : '<span class="chip warn">重启生效</span>';
+  const attr = `data-key="${esc(key)}" data-type="${esc(type)}"`;
+  let control;
+
+  if (type === 'boolean') {
+    control = `<div class="field-ctl row-switch">
+      <span class="hint">${value ? '已开启' : '已关闭'}</span>
+      <label class="switch"><input type="checkbox" ${attr} ${value ? 'checked' : ''}><span class="slider"></span></label>
+    </div>`;
+  } else if (Array.isArray(schema.enum)) {
+    const enumType = typeof schema.enum[0] === 'number' ? 'number' : 'string';
+    const options = schema.enum.map((v) => `<option value="${esc(v)}" ${String(v) === String(value) ? 'selected' : ''}>${esc(v === '' ? '（自动）' : v)}</option>`).join('');
+    control = `<div class="field-ctl"><select ${attr} data-etype="${enumType}">${options}</select></div>`;
+  } else if ((type === 'number' || type === 'integer') && schema.minimum !== undefined && schema.maximum !== undefined) {
+    const step = schema.multipleOf || (type === 'integer' ? 1 : 0.1);
+    const suffix = schema['x-suffix'] || '';
+    control = `<div class="field-ctl"><div class="range-row">
+      <input type="range" ${attr} min="${schema.minimum}" max="${schema.maximum}" step="${step}" value="${esc(value ?? schema.minimum)}">
+      <span class="range-out" data-out="${esc(key)}">${esc(value ?? schema.minimum)}${esc(suffix)}</span>
+    </div></div>`;
+  } else if (type === 'number' || type === 'integer') {
+    control = `<div class="field-ctl"><input type="number" ${attr} value="${esc(value ?? '')}" ${schema.minimum !== undefined ? `min="${schema.minimum}"` : ''} ${schema.maximum !== undefined ? `max="${schema.maximum}"` : ''} step="${schema.multipleOf || (type === 'integer' ? 1 : 'any')}"></div>`;
+  } else if (type === 'string') {
+    control = `<div class="field-ctl"><input type="text" ${attr} value="${esc(value ?? '')}" autocomplete="off"></div>`;
+  } else {
+    return '';
+  }
+  return `<div class="field">
+    <div class="field-top"><div><div class="field-label">${esc(title)}</div>${desc}</div>${chip}</div>
+    ${control}
+  </div>`;
+}
+
+function groupHtml(entry) {
+  const g = entry.group || {};
+  const schema = g.schema || {};
+  const props = Object.entries(schema.properties || {}).filter(([k]) => !SENSITIVE_KEY.test(k));
+  if (!props.length) return '';
+  const fields = props.map(([k, s]) => fieldHtml(k, s, entry.values?.[k])).join('');
+  const owner = String(g.owner || '');
+  const restartId = owner.startsWith('world:') ? owner.slice(6).split(':')[0] : '';
+  const id = esc(g.id || '');
+  return `<details class="card group" data-group="${id}" ${state.openGroups.has(g.id) ? 'open' : ''}>
+    <summary>
+      <div class="g-text">
+        <div class="group-title">${esc(schema.title || g.id)}</div>
+        <div class="group-sub">${props.length} 项 · ${esc(owner || 'core')}</div>
+      </div>
+      <span class="chevron">›</span>
+    </summary>
+    <div class="group-body">
+      ${schema.description ? `<p class="group-desc">${esc(schema.description)}</p>` : ''}
+      <form data-form="${id}" data-restart="${esc(restartId)}" data-dirty="[]">
+        ${fields}
+        <div class="savebar">
+          <span class="hint">${restartId ? '改动后可直接重启该 World' : '仅提交改动过的项'}</span>
+          <div style="display:flex;gap:6px">
+            ${restartId ? '<button type="button" class="btn" data-do="restart">重启</button>' : ''}
+            <button type="submit" class="btn primary" disabled>保存</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </details>`;
+}
+
+function renderConfig() {
+  const q = state.configQuery.trim().toLowerCase();
+  const matched = state.groups.filter((entry) => {
+    if (!q) return true;
+    const g = entry.group || {};
+    const hay = `${g.id || ''} ${g.schema?.title || ''} ${Object.entries(g.schema?.properties || {}).map(([k, v]) => `${k} ${v.title || ''}`).join(' ')}`.toLowerCase();
+    return hay.includes(q);
+  });
+  const cats = new Map();
+  for (const entry of matched) {
+    const cat = categoryOf(entry);
+    if (!cats.has(cat)) cats.set(cat, []);
+    cats.get(cat).push(entry);
+  }
+  const html = Array.from(cats.entries()).map(([cat, list]) => `
+    <div class="cat-title">${esc(cat)} <span>${list.length}</span></div>
+    ${list.map(groupHtml).join('')}`).join('');
+  $('#configList').innerHTML = html || emptyState('没有匹配的设置组', '换个关键词试试。');
+}
+
+function markDirty(form, key) {
+  const dirty = new Set(JSON.parse(form.dataset.dirty || '[]'));
+  dirty.add(key);
+  form.dataset.dirty = JSON.stringify(Array.from(dirty));
+  const btn = $('button[type=submit]', form);
+  btn.disabled = false;
+  btn.textContent = '保存改动';
+}
+
+function collect(form) {
+  const values = {};
+  for (const key of JSON.parse(form.dataset.dirty || '[]')) {
+    const el = $(`[data-key="${key}"]`, form);
+    if (!el) continue;
+    if (el.type === 'checkbox') values[key] = el.checked;
+    else if (el.dataset.type === 'number' || el.dataset.type === 'integer') values[key] = Number(el.value);
+    else if (el.tagName === 'SELECT' && el.dataset.etype === 'number') values[key] = Number(el.value);
+    else values[key] = el.value;
+  }
+  return values;
+}
+
+async function saveGroup(form) {
+  const group = form.dataset.form;
+  const values = collect(form);
+  if (!Object.keys(values).length) return;
+  const btn = $('button[type=submit]', form);
+  btn.disabled = true;
+  try {
+    await api('/api/m/config', { method: 'POST', body: JSON.stringify({ group, values }) });
+    toast('已保存到桌面');
+    form.dataset.dirty = '[]';
+    await load();
+  } catch (err) {
+    btn.disabled = false;
+    toast('保存失败：' + err.message, true);
+  }
+}
+
+/* ------------------------------- events ------------------------------- */
+
+$$('.tab').forEach((tab) => tab.addEventListener('click', () => {
+  $$('.tab').forEach((t) => t.classList.toggle('active', t === tab));
+  $$('.panel').forEach((p) => p.classList.toggle('active', p.id === 'panel-' + tab.dataset.tab));
+}));
+
+$('#refreshBtn').addEventListener('click', async () => {
+  const btn = $('#refreshBtn');
+  btn.classList.add('spin');
+  await load();
+  setTimeout(() => btn.classList.remove('spin'), 800);
+});
+
+$('#worldSearch').addEventListener('input', (e) => { state.worldQuery = e.target.value; renderWorlds(); });
+$('#configSearch').addEventListener('input', (e) => { state.configQuery = e.target.value; renderConfig(); });
+
+$('#worldList').addEventListener('change', (e) => {
+  const el = e.target.closest('input[data-act]');
+  if (!el) return;
+  const card = el.closest('.card');
+  void changeWorld(card.dataset.id, el.dataset.act, el.checked, el);
+});
+
+$('#worldList').addEventListener('click', (e) => {
+  const btn = e.target.closest('button[data-act]');
+  if (!btn) return;
+  const card = btn.closest('.card');
+  const name = $('.world-name', card)?.textContent || card.dataset.id;
+  if (btn.dataset.act === 'restart') void restartWorld(card.dataset.id, name);
+  if (btn.dataset.act === 'detail') {
+    const detail = $('.world-detail', card);
+    detail.hidden = !detail.hidden;
+    btn.textContent = detail.hidden ? '详情' : '收起';
+  }
+});
+
+$('#configList').addEventListener('toggle', (e) => {
+  const d = e.target.closest('details.group');
+  if (!d) return;
+  if (d.open) state.openGroups.add(d.dataset.group);
+  else state.openGroups.delete(d.dataset.group);
+}, true);
+
+$('#configList').addEventListener('input', (e) => {
+  const el = e.target.closest('[data-key]');
+  if (!el) return;
+  const form = el.closest('form');
+  markDirty(form, el.dataset.key);
+  if (el.type === 'checkbox') {
+    const hint = el.closest('.row-switch')?.querySelector('.hint');
+    if (hint) hint.textContent = el.checked ? '已开启' : '已关闭';
+  }
+  if (el.type === 'range') {
+    const out = $(`[data-out="${el.dataset.key}"]`, form);
+    if (out) out.textContent = el.value + (out.textContent.replace(/^[\d.-]+/, ''));
+  }
+});
+
+$('#configList').addEventListener('change', (e) => {
+  const el = e.target.closest('select[data-key]');
+  if (el) markDirty(el.closest('form'), el.dataset.key);
+});
+
+$('#configList').addEventListener('submit', (e) => {
+  e.preventDefault();
+  void saveGroup(e.target);
+});
+
+$('#configList').addEventListener('click', async (e) => {
+  const btn = e.target.closest('button[data-do=restart]');
+  if (!btn) return;
+  const form = btn.closest('form');
+  const id = form.dataset.restart;
+  if (id) await restartWorld(id, id);
+});
+
+$('#dlgCancel').addEventListener('click', () => finishAsk(false));
+$('#dlgOk').addEventListener('click', () => finishAsk(true));
+$('#mask').addEventListener('click', (e) => { if (e.target === $('#mask')) finishAsk(false); });
+
+/* ------------------------------- startup ------------------------------ */
+
+(function boot() {
+  const avatar = new Image();
+  avatar.onload = () => { const box = $('#avatar'); box.textContent = ''; box.appendChild(avatar); };
+  avatar.src = '/api/avatar';
+  void load();
+})();

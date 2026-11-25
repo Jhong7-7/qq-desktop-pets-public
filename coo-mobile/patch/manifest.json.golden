@@ -1,0 +1,35 @@
+{
+  "id": "/console",
+  "name": "Coo 控制台",
+  "short_name": "Coo",
+  "description": "Coopanion 手机端：World 开关、设置，以及去看桌宠",
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "start_url": "/console?m=YOUR_ACCESS_TOKEN_HERE",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#F5F7F8",
+  "theme_color": "#33897F",
+  "categories": ["utilities", "productivity"],
+  "icons": [
+    { "src": "/web/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/web/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/web/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "去看桌宠",
+      "short_name": "桌宠",
+      "description": "和 Coo 聊天",
+      "url": "/pet?m=YOUR_ACCESS_TOKEN_HERE",
+      "icons": [{ "src": "/web/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "换装",
+      "short_name": "换装",
+      "url": "/dress?m=YOUR_ACCESS_TOKEN_HERE",
+      "icons": [{ "src": "/web/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

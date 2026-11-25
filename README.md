@@ -25,14 +25,21 @@ dsh-pet-qq/            溪颜 OneBot 桥（Node.js）
   watch-mode.mjs       共看/监控模式
   stickers.mjs         表情包
   watchdog.ps1         看门狗与自启
-  config.json          运行配置（含 token，勿公开）
+  config.json          运行配置（凭据已占位符化）
 
 coopanion/
   extensions/          Coo world 扩展（qq、songs、wechat、daily-life 等）
   companion/           泡泡人设与状态配置
-    config.json        主配置（含 token，勿公开）
+    config.json        主配置（凭据已占位符化）
     worlds/            world 定义
     data/emote-pics/   表情包图库
+
+coo-mobile/            泡泡手机版（CooConsole 安卓 App + PWA 控制台）
+  apk-src/             安卓源码（悬浮窗宠物、聊天页、无障碍服务等）
+  patch/*.golden       PWA 控制台 golden 文件（pet.html / server.ts 等）
+  build-apk.py         APK 构建脚本
+  start-tunnel.py      隧道启动（cloudflared / ngrok）
+  CooConsole-2.5.apk   最新版安装包
 ```
 
 ## 运行环境（原机）
@@ -40,6 +47,7 @@ coopanion/
 - 本仓库是**备份仓库**，目录结构与原机不同，原机运行路径为：
   - 溪颜：`D:\dsh workplace\tools\dsh-pet-qq`
   - 泡泡：`D:\coopanion\data\extensions\local` + `D:\coopanion\data\home\companion`
+  - 泡泡手机版：`D:\wb\coo手机化`
 - 未包含：node_modules（`npm install` / `pnpm install` 自行恢复）、语音模型
   （RVC / GPT-SoVITS / singer，约 4G+）、聊天记忆档案（archivist）、运行日志。
 
@@ -47,9 +55,11 @@ coopanion/
 
 本仓库已做全面脱敏后公开内容：
 
-- 凭据 / token / API key → 全部替换为 `YOUR_CREDENTIAL_HERE` 占位符
+- 凭据 / token / API key / 访问令牌 → 全部替换为 `YOUR_CREDENTIAL_HERE` 等占位符
 - QQ 号 / 群号 → 替换为 10000 / 10001 / 20000 等占位号码
-- 已移除：聊天记录、记忆档案、运行状态、登录 cookies（.secret/）、头像、telemetry、语音模型
+- 内网 IP / ntfy 频道 ID → 占位符
+- 已移除：聊天记录、记忆档案、运行状态、登录 cookies（.secret/）、头像、telemetry、语音模型、
+  隧道私钥（keys/）、cloudflared/ngrok 二进制、历史 APK、日志与二维码图
 - 保留：全部功能代码、人设 prompt、配置结构、world 扩展、表情包图库
 
 若在原机恢复运行，需自行填回真实凭据与号码。

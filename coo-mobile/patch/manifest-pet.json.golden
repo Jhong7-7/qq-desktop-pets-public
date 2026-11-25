@@ -1,0 +1,33 @@
+{
+  "id": "/pet",
+  "name": "Coo 桌宠",
+  "short_name": "Coo",
+  "description": "和桌面同一只 Coo 聊天",
+  "lang": "zh-CN",
+  "start_url": "/pet?m=YOUR_ACCESS_TOKEN_HERE",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#11171A",
+  "theme_color": "#11171A",
+  "icons": [
+    { "src": "/web/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/web/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/web/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "控制台",
+      "short_name": "控制台",
+      "description": "World 开关与设置",
+      "url": "/console?m=YOUR_ACCESS_TOKEN_HERE",
+      "icons": [{ "src": "/web/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "换装",
+      "short_name": "换装",
+      "url": "/dress?m=YOUR_ACCESS_TOKEN_HERE",
+      "icons": [{ "src": "/web/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

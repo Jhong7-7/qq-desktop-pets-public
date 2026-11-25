@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#11171A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Coo">
+<link rel="manifest" href="/web/manifest-pet.json">
+<link rel="apple-touch-icon" href="/web/icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/web/icon-192.png">
+<title>Cortico</title>
+<link rel="stylesheet" href="/web/pet.css">
+</head>
+<body>
+<div class="floor" aria-hidden="true"></div>
+<div class="stage" id="stage">
+  <!-- the body (its shadow and particles too), run by its figure pack in a sandboxed frame (body-host.js) -->
+  <div class="figure-layer" id="figureLayer"></div>
+</div>
+<div class="bubble" id="bubble" role="status" aria-live="polite" hidden></div>
+<div class="menu" id="menu" role="menu" hidden></div>
+<div class="tools" id="tools" hidden></div>
+<script type="module" src="/web/pet-app.js"></script>
+<style>
+  /* Phone only: the desktop transparent pet window uses a fine pointer. */
+  #cooConsoleBtn{display:none}
+  @media (pointer:coarse){
+    #cooConsoleBtn{
+      display:grid;place-items:center;position:fixed;z-index:2147483647;
+      right:calc(14px + env(safe-area-inset-right));
+      bottom:calc(14px + env(safe-area-inset-bottom));
+      width:44px;height:44px;border-radius:50%;text-decoration:none;
+      background:rgba(28,36,40,.78);border:1px solid rgba(255,255,255,.18);
+      color:#F2F7F6;font-size:19px;line-height:1;
+      box-shadow:0 4px 18px rgba(0,0,0,.30);
+      -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+    }
+  }
+</style>
+<a id="cooConsoleBtn" href="/console" aria-label="打开控制台" title="控制台">⚙</a>
+</body>
+</html>

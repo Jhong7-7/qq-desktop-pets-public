@@ -1,0 +1,793 @@
+/**
+ * Local HTTP + WebSocket server for the pet's pages. Binds 127.0.0.1 only and answers only
+ * requests whose Host is a loopback name, so a web page cannot reach it through DNS rebinding.
+ *
+ * - `/pet`: the pet itself. In the pet window it is transparent and click-through outside
+ *   the figure; in a browser tab it draws a floor.
+ * - `/dress`: the dressing page; changes go through `POST /api/skin` and `POST /api/prefs`.
+ * - `/api/avatar`: the bot's avatar for the menu header, 404 until one exists.
+ * - `POST /api/speech` (`{ text }`): the syllables the pet page's speech plays for a bubble's text (src/speech).
+ * - `/api/figures`: the figure packs (src/packs.ts) the pages may load, Coo's first, each with whether it
+ *   can be uninstalled (`removable`); `/packs/<id>/…`: an installed pack's files (a built-in one is under
+ *   `/web/`). `/api/figures/status`: the installed packs that did not load and why, and whether packs can be
+ *   imported here; `POST /api/figures/import` (a zip, or the page's framing of folders), `…/import/install`
+ *   and `…/import/cancel` import them, `POST /api/figures/remove` (`{ id }`) uninstalls one (src/pack-import.ts).
+ * - `/figure-frame?pack=<id>`: the sandbox a pack's code runs in. Its own CSP sandboxes it (an opaque
+ *   origin) and lets it connect only to `/packs/<id>/` of an installed pack, nowhere for any other id;
+ *   scripts and images come from this server only. Files
+ *   under `/web/` and `/packs/` answer that opaque origin's CORS requests; nothing else does,
+ *   and a write (`POST`, the socket) from it is refused.
+ * - `/socket?role=pet|dress&host=window|tab`: one live pet connection plus any number of
+ *   pages that only receive skin and preference updates. The window and overlay source authenticate
+ *   with the key carried by `windowUrl`. A newer pet connection replaces the live one, except
+ *   that a browser tab only watches while the pet window is connected. A
+ *   watching tab still sends typed text, preference changes and run-control clicks.
+ *   Binary frames from the pet connection are 16 kHz mono PCM16 microphone audio.
+ * - `/overlay` and `/socket?role=overlay`: the OBS overlay page and its feed, while `overlay()` is on
+ *   (404 and a closed socket otherwise). `/socket?role=overlay-source` is the pet window process: it is told
+ *   `{ t: 'overlay', on }` (on while the overlay is on and a page watches) and its binary frames
+ *   (host/overlay.cjs) go to every overlay page as they are; when it goes, the pages are sent a frame that clears them.
+ */
+import { createServer, request as httpRequest, type IncomingMessage, type Server, type ServerResponse } from 'node:http';
+import { randomUUID } from 'node:crypto';
+import { readFile } from 'node:fs/promises';
+import { basename, extname, join, normalize, sep } from 'node:path';
+import { WebSocketServer, type WebSocket } from 'ws';
+import { languageTag, type Language } from 'cortico/core/language.ts';
+import { readTextFile } from 'cortico/core/util.ts';
+import { packFile, type FigurePack, type PackProblem } from './packs.ts';
+import { BUNDLE_TYPE, IMPORT_LARGE, PACK_DEPTH, filesFromBundle, filesFromZip, type PackImporter } from './pack-import.ts';
+import { petText, type PetText } from './i18n/index.ts';
+import type { SpeechUnit } from './speech/index.ts';
+
+const MIME: Record<string, string> = {
+  '.html': 'text/html; charset=utf-8',
+  '.js': 'text/javascript; charset=utf-8',
+  '.css': 'text/css; charset=utf-8',
+  '.svg': 'image/svg+xml',
+  '.png': 'image/png',
+  '.json': 'application/json; charset=utf-8',
+  '.ogg': 'audio/ogg',
+  '.mp3': 'audio/mpeg',
+  '.wav': 'audio/wav',
+};
+const PAGES: Record<string, string> = { '/pet': 'pet.html', '/dress': 'dress.html', '/console': 'mobile-console.html' };
+const LOOPBACK = /^(127\.0\.0\.1|localhost|\[::1\])(:\d+)?$/i;
+const PORT_ATTEMPTS = 10;
+/** Core's own Web UI. It binds loopback, so only this process can reach it. */
+const CORE_PORT = Number(process.env.COOPANION_CORE_PORT || 17788);
+/**
+ * The narrow set of Core APIs the phone console may reach, proxied from this
+ * server. Provider secrets, extension install/uninstall, storage clearing,
+ * sessions and logs stay unreachable; the phone's own token check already ran
+ * in `allowed()` before any of these are considered.
+ */
+const CONSOLE_APIS: ReadonlyArray<{ path: string; method: string; target: string }> = [
+  { path: '/api/m/status', method: 'GET', target: '/api/status' },
+  { path: '/api/m/worlds', method: 'GET', target: '/api/worlds' },
+  { path: '/api/m/config', method: 'GET', target: '/api/config' },
+  { path: '/api/m/worlds/activation', method: 'POST', target: '/api/worlds/activation' },
+  { path: '/api/m/worlds/visibility', method: 'POST', target: '/api/worlds/visibility' },
+  { path: '/api/m/worlds/restart', method: 'POST', target: '/api/worlds/restart' },
+  { path: '/api/m/config', method: 'POST', target: '/api/config' },
+];
+/**
+ * The address these pages are served on, and the token a phone carries to reach them. `127.0.0.1` keeps
+ * the desktop layout; a LAN address with a token lets a phone on the same network open the same pet.
+ */
+const BIND = process.env.COOPANION_PET_BIND || '127.0.0.1';
+const MOBILE_TOKEN = process.env.COOPANION_PET_MOBILE_TOKEN || '';
+const MOBILE_COOKIE = 'coopanion_pet_mobile';
+/** `0.0.0.0` and `::` answer every local address. */
+const WILD_BIND = BIND === '0.0.0.0' || BIND === '::';
+/**
+ * A pack's files: the figure frame imports its scripts and loads its images, which this does not
+ * restrict; a pack's HTML or SVG opened as a page runs in an opaque origin with no network.
+ */
+const PACK_CSP = "sandbox allow-scripts; default-src 'none'";
+/** The pages' own CSP. */
+const PAGE_CSP = "default-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' ws://127.0.0.1:* ws://localhost:*; img-src 'self' data:; media-src 'self' blob:; worker-src 'self' blob:; frame-ancestors 'self' http://127.0.0.1:* http://localhost:*";
+/** What a watching pet page may still send: input that is the person's whichever page it came from. */
+const WATCHER_MESSAGES = new Set(['text', 'prefs', 'control']);
+
+/** A Host header's name alone, its port and IPv6 brackets aside. */
+function hostNameOf(header: string): string {
+  try {
+    return new URL(`http://${header}`).hostname.toLowerCase();
+  } catch {
+    return '';
+  }
+}
+
+/** A cookie's value out of a Cookie header; null when it is absent. */
+function cookieValue(header: string | undefined, name: string): string | null {
+  if (!header) return null;
+  for (const part of header.split(';')) {
+    const at = part.indexOf('=');
+    if (at > 0 && part.slice(0, at).trim() === name) return part.slice(at + 1).trim();
+  }
+  return null;
+}
+
+/** Whether this request came from another machine rather than this one. */
+function fromAnotherMachine(host: string): boolean {
+  if (host === '' || LOOPBACK.test(host)) return false;
+  return WILD_BIND || !LOOPBACK.test(BIND);
+}
+
+export type PageMessage = Record<string, unknown> & { t: string };
+
+export interface PetServerOptions {
+  port: () => number;
+  webDir: string;
+  /** Snapshot sent to every new connection and served at `/api/state`. */
+  snapshot(): Record<string, unknown>;
+  onPetMessage(msg: PageMessage): void;
+  onAudio(frame: Int16Array): void;
+  onPetConnect(): void;
+  onPetDisconnect(): void;
+  /** A dressing page saved a skin. */
+  onSkin(skin: unknown): void;
+  onPrefs(prefs: Record<string, unknown>): void;
+  /** PNG served at `/api/avatar`. */
+  avatarFile?: string;
+  /** The figure packs, looked up again for each request. */
+  packs?(): FigurePack[];
+  /** What was wrong in the pack directories, looked up again for each request. */
+  packProblems?(): PackProblem[];
+  /** Installs packs the dressing page sends; without it the page offers no import. */
+  importer?: PackImporter;
+  /** The app language, stamped on each page's `<html lang>` as it is served; the page loads its text in it. `zh` when absent. */
+  language?(): Language;
+  /** The text table of the app language, for errors; Chinese when absent. */
+  text?(): PetText;
+  /** Whether the OBS overlay is served; off when absent. */
+  overlay?(): boolean;
+  /** The syllables `text` is spoken as; `POST /api/speech` answers 404 without it. */
+  speech?(text: string): SpeechUnit[];
+}
+
+export class PetServer {
+  private http: Server | null = null;
+  private wss: WebSocketServer | null = null;
+  private pet: WebSocket | null = null;
+  private petIsWindow = false;
+  /** The phone from another machine holding the pet now; the desktop window only watches until it leaves. */
+  private phone: WebSocket | null = null;
+  /** The pet window's connections while the phone holds the pet; they take it back when the phone leaves. */
+  private readonly windowWatchers = new Set<WebSocket>();
+  /** Dressing pages and pet pages that only watch. */
+  private readonly dressers = new Set<WebSocket>();
+  /** The pet window process sending the overlay's frames, and the overlay pages watching. */
+  private overlaySource: WebSocket | null = null;
+  private readonly overlayViewers = new Set<WebSocket>();
+  /** What the source was last told. */
+  private overlayTold: boolean | null = null;
+  private boundPort = 0;
+  private readonly windowKey = randomUUID();
+
+  constructor(private readonly opts: PetServerOptions) {}
+
+  get port(): number {
+    return this.boundPort;
+  }
+
+  private get t(): PetText {
+    return this.opts.text?.() ?? petText();
+  }
+
+  get origin(): string {
+    return this.boundPort ? `http://127.0.0.1:${this.boundPort}` : '';
+  }
+
+  /** Only the window host receives this URL; its fragment stays out of HTTP requests and referrers. */
+  get windowUrl(): string {
+    return `${this.origin}/pet#key=${this.windowKey}`;
+  }
+
+  get petConnected(): boolean {
+    return this.pet !== null && this.pet.readyState === this.pet.OPEN;
+  }
+
+  /** The connected pet page is the pet window, not a browser tab. */
+  get petInWindow(): boolean {
+    return this.petConnected && this.petIsWindow;
+  }
+
+  async start(): Promise<number> {
+    const base = this.opts.port();
+    let lastErr: Error | null = null;
+    for (let i = 0; i < PORT_ATTEMPTS; i++) {
+      const server = createServer((req, res) => { void this.handle(req, res); });
+      try {
+        await new Promise<void>((done, fail) => {
+          server.once('error', fail);
+          server.listen(base === 0 ? 0 : base + i, BIND, () => { server.off('error', fail); done(); });
+        });
+      } catch (err) {
+        lastErr = err as Error;
+        const code = (err as NodeJS.ErrnoException).code;
+        if (code === 'EADDRINUSE' || code === 'EACCES') continue;
+        throw err;
+      }
+      this.http = server;
+      const addr = server.address();
+      this.boundPort = typeof addr === 'object' && addr ? addr.port : 0;
+      this.wss = new WebSocketServer({ noServer: true });
+      server.on('upgrade', (req, socket, head) => {
+        if (!this.allowed(req, true)) { socket.end('HTTP/1.1 421 Misdirected Request\r\nConnection: close\r\n\r\n'); return; }
+        const url = new URL(req.url ?? '/', this.origin);
+        if (url.pathname !== '/socket') { socket.destroy(); return; }
+        const params = url.searchParams;
+        if ((params.get('host') === 'window' || params.get('role') === 'overlay-source') && params.get('key') !== this.windowKey) {
+          socket.end('HTTP/1.1 403 Forbidden\r\nConnection: close\r\n\r\n'); return;
+        }
+        this.wss!.handleUpgrade(req, socket, head, (ws) => this.accept(ws, req));
+      });
+      return this.boundPort;
+    }
+    throw new Error(this.t.portsTaken(base, base + PORT_ATTEMPTS - 1, lastErr?.message ?? ''));
+  }
+
+  async stop(): Promise<void> {
+    for (const ws of [this.pet, ...this.dressers, ...this.windowWatchers, this.overlaySource, ...this.overlayViewers]) ws?.close();
+    this.pet = null;
+    this.phone = null;
+    this.windowWatchers.clear();
+    this.dressers.clear();
+    this.overlaySource = null;
+    this.overlayViewers.clear();
+    this.wss?.close();
+    this.wss = null;
+    const http = this.http;
+    this.http = null;
+    this.boundPort = 0;
+    if (http) {
+      http.closeAllConnections();
+      await new Promise<void>((r) => http.close(() => r()));
+    }
+  }
+
+  /** Sends to the pet page; false when no page is connected. */
+  sendPet(msg: PageMessage): boolean {
+    if (!this.petConnected) return false;
+    this.pet!.send(JSON.stringify(msg));
+    return true;
+  }
+
+  /** Sends to the pet page and every dressing page. */
+  broadcast(msg: PageMessage): void {
+    const text = JSON.stringify(msg);
+    for (const ws of [this.pet, ...this.dressers]) if (ws && ws.readyState === ws.OPEN) ws.send(text);
+  }
+
+  /** Follows `overlay()`: off closes the overlay pages; the source streams while it is on and a page watches. */
+  syncOverlay(): void {
+    if (!this.overlayEnabled) for (const ws of this.overlayViewers) ws.close(4003, 'overlay off');
+    const source = this.overlaySource;
+    if (!source || source.readyState !== source.OPEN) return;
+    const on = this.overlayEnabled && this.overlayViewers.size > 0;
+    if (on === this.overlayTold) return;
+    this.overlayTold = on;
+    source.send(JSON.stringify({ t: 'overlay', on }));
+  }
+
+  private get overlayEnabled(): boolean {
+    return this.opts.overlay?.() ?? false;
+  }
+
+  /**
+   * Browser writes require this service's HTTP origin; local clients may omit Origin. Reads also allow loopback
+   * and opaque origins. A request from another machine also needs the phone's token.
+   */
+  private allowed(req: IncomingMessage, write: boolean): boolean {
+    const host = req.headers.host ?? '';
+    if (fromAnotherMachine(host) && !this.frameAsset(req)) {
+      if (!WILD_BIND && hostNameOf(host) !== BIND.toLowerCase()) return false;
+      if (!this.mobileAuthed(req)) return false;
+    }
+    const origin = req.headers.origin;
+    if (origin === 'null') return !write;
+    if (!origin) return true;
+    let originHost = '';
+    try {
+      originHost = new URL(origin).host.toLowerCase();
+    } catch {
+      return false;
+    }
+    if (write) return originHost === host.toLowerCase() || originHost === `127.0.0.1:${this.boundPort}` || originHost === `localhost:${this.boundPort}`;
+    return LOOPBACK.test(originHost) || originHost === host.toLowerCase();
+  }
+
+  /**
+   * The figure body lives in a `sandbox="allow-scripts"` frame: its origin is `null`,
+   * so its `<script type="module">` and static imports are cross-origin CORS requests
+   * that browsers send WITHOUT the page's cookie. On a public tunnel those scripts
+   * would all get 421 and the body would time out ("20 秒内没有准备好"). These are
+   * only static scripts/images - no page, no API, no socket - so let them through.
+   * `/figure-frame` itself still requires the token carried in its own URL.
+   */
+  private frameAsset(req: IncomingMessage): boolean {
+    if (req.headers.origin !== 'null') return false;
+    if (req.method !== 'GET' && req.method !== 'HEAD') return false;
+    try {
+      const p = new URL(req.url ?? '/', 'http://x').pathname;
+      return p.startsWith('/web/') || p.startsWith('/packs/');
+    } catch {
+      return false;
+    }
+  }
+
+  /** The token a phone carries once on the page's URL and then in its cookie. */
+  private mobileAuthed(req: IncomingMessage): boolean {
+    if (MOBILE_TOKEN === '') return false;
+    let asked = '';
+    try {
+      asked = new URL(req.url ?? '/', 'http://x').searchParams.get('m') ?? '';
+    } catch {
+      asked = '';
+    }
+    if (asked === MOBILE_TOKEN) return true;
+    return cookieValue(req.headers.cookie, MOBILE_COOKIE) === MOBILE_TOKEN;
+  }
+
+  private accept(ws: WebSocket, req: IncomingMessage): void {
+    const params = new URL(req.url ?? '/', 'http://x').searchParams;
+    const fromWindow = params.get('host') === 'window';
+    // a phone on another machine holds the pet itself, and the desktop window stands down while it does
+    const fromPhone = params.get('role') === 'pet' && fromAnotherMachine(req.headers.host ?? '');
+    if (params.get('role') === 'overlay-source') return this.acceptOverlaySource(ws);
+    if (params.get('role') === 'overlay') return this.acceptOverlayViewer(ws);
+    ws.send(JSON.stringify({ t: 'init', ...this.opts.snapshot() }));
+    if (fromWindow && this.phone !== null) {
+      // the phone has the pet: the window waits as a watcher, and takes the pet back when the phone lets go
+      this.windowWatchers.add(ws);
+      ws.send(JSON.stringify({ t: 'watching' }));
+      ws.on('message', (data, isBinary) => {
+        const msg = isBinary ? null : parse(data.toString());
+        if (msg && WATCHER_MESSAGES.has(msg.t)) this.opts.onPetMessage(msg);
+      });
+      ws.on('close', () => this.windowWatchers.delete(ws));
+      this.dressers.add(ws);
+      ws.on('close', () => this.dressers.delete(ws));
+      return;
+    }
+    // the pet window outranks a browser tab: a tab opened while the window is connected only watches
+    const watcher = params.get('role') !== 'pet'
+      || (!fromWindow && !fromPhone && this.phone === null && this.petConnected && this.petIsWindow);
+    if (!watcher) {
+      const old = this.pet;
+      if (fromPhone) this.phone = ws;
+      this.pet = ws;
+      this.petIsWindow = fromWindow;
+      if (old) old.close(4000, 'replaced');
+      this.opts.onPetConnect();
+      ws.on('message', (data, isBinary) => {
+        if (this.pet !== ws) return;
+        if (isBinary) {
+          const buf = data as Buffer;
+          if (buf.length % 2 === 0) this.opts.onAudio(new Int16Array(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.length)));
+          return;
+        }
+        const msg = parse(data.toString());
+        if (msg) this.opts.onPetMessage(msg);
+      });
+      ws.on('close', () => {
+        if (this.pet !== ws) return;
+        this.pet = null;
+        this.opts.onPetDisconnect();
+        if (this.phone === ws) {
+          this.phone = null;
+          // the phone let go: the window takes the pet back instead of standing as a watcher
+          for (const w of this.windowWatchers) if (w.readyState === w.OPEN) w.close(4001, 'pet back');
+          this.windowWatchers.clear();
+        }
+      });
+      return;
+    }
+    if (params.get('role') === 'pet') {
+      ws.send(JSON.stringify({ t: 'watching' }));
+      ws.on('message', (data, isBinary) => {
+        const msg = isBinary ? null : parse(data.toString());
+        if (msg && WATCHER_MESSAGES.has(msg.t)) this.opts.onPetMessage(msg);
+      });
+    }
+    this.dressers.add(ws);
+    ws.on('close', () => this.dressers.delete(ws));
+  }
+
+  private acceptOverlaySource(ws: WebSocket): void {
+    this.overlaySource?.close(4000, 'replaced');
+    this.overlaySource = ws;
+    this.overlayTold = null;
+    ws.on('message', (data, isBinary) => {
+      if (this.overlaySource !== ws || !isBinary || !this.overlayEnabled) return;
+      for (const viewer of this.overlayViewers) if (viewer.readyState === viewer.OPEN) viewer.send(data, { binary: true });
+    });
+    ws.on('close', () => {
+      if (this.overlaySource !== ws) return;
+      this.overlaySource = null;
+      // the window process is gone: the pages must not keep its last picture
+      const clear = Buffer.alloc(24);
+      for (const viewer of this.overlayViewers) if (viewer.readyState === viewer.OPEN) viewer.send(clear, { binary: true });
+    });
+    this.syncOverlay();
+  }
+
+  private acceptOverlayViewer(ws: WebSocket): void {
+    if (!this.overlayEnabled) { ws.close(4003, 'overlay off'); return; }
+    this.overlayViewers.add(ws);
+    ws.on('close', () => { this.overlayViewers.delete(ws); this.syncOverlay(); });
+    this.syncOverlay();
+  }
+
+  private async handle(req: IncomingMessage, res: ServerResponse): Promise<void> {
+    if (!this.allowed(req, req.method !== 'GET' && req.method !== 'HEAD')) { res.writeHead(421).end(); return; }
+    const url = new URL(req.url ?? '/', 'http://x');
+    const path = url.pathname;
+    // the phone's first visit carries the token; the cookie keeps its assets and its socket authed afterwards.
+    // The figure body lives in a `sandbox="allow-scripts"` iframe: it has an opaque origin, so browsers treat
+    // every request it makes as cross-site and a SameSite=Lax cookie is NOT sent -> all of the frame's scripts
+    // get 421 and the pet never becomes ready. Over an HTTPS tunnel the cookie must be SameSite=None; Secure.
+    // Plain HTTP (desktop / LAN) keeps Lax, because a Secure cookie would be refused there.
+    const forwardedProto = String(req.headers['x-forwarded-proto'] ?? '').split(',')[0].trim().toLowerCase();
+    const tunnelHost = /(^|\.)(trycloudflare\.com|ngrok-free\.app|ngrok\.app|lhr\.life|localhost\.run)$/i
+      .test(hostNameOf(req.headers.host ?? ''));
+    const cookieSite = forwardedProto === 'https' || tunnelHost ? 'SameSite=None; Secure' : 'SameSite=Lax';
+    if (MOBILE_TOKEN !== '' && url.searchParams.get('m') === MOBILE_TOKEN) {
+      res.setHeader('set-cookie', `${MOBILE_COOKIE}=${MOBILE_TOKEN}; Path=/; HttpOnly; ${cookieSite}; Max-Age=31536000`);
+    }
+    // The phone's native chat page: send a line like the pet's own typing box,
+    // and read back only this World's conversation (never Core's whole event log).
+    if (req.method === 'POST' && path === '/api/m/chat/send') return this.chatSend(req, res);
+    if (req.method === 'GET' && path === '/api/m/chat/events') return this.chatEvents(res, url);
+    const consoleApi = CONSOLE_APIS.find((a) => a.path === path && a.method === req.method);
+    if (consoleApi) return this.proxyCore(req, res, consoleApi.target);
+    if (req.method === 'GET' && path === '/api/figures') {
+      const importer = this.opts.importer;
+      return json(res, 200, (this.opts.packs?.() ?? []).map((pack) => {
+        const { id, base, manifest: m } = pack;
+        return {
+          id, base, name: m.name, thumb: m.thumb ?? null, entry: m.entry, export: m.export, model: m.model ?? null, axes: m.axes, presets: m.presets,
+          vocab: m.vocab.map(({ id: w, kind, seconds, lasting }) => ({ id: w, kind, seconds, ...(lasting ? { lasting } : {}) })), sounds: m.sounds, can: m.can, needs: m.needs,
+          voice: m.voice, effects: m.effects, bubble: m.bubble ?? null,
+          removable: importer?.removable(pack) ?? false,
+        };
+      }));
+    }
+    if (req.method === 'GET' && path === '/api/figures/status') {
+      return json(res, 200, {
+        importable: !!this.opts.importer, large: IMPORT_LARGE, depth: PACK_DEPTH,
+        problems: (this.opts.packProblems?.() ?? []).filter((p) => !p.loaded).map((p) => ({ dir: basename(p.dir), reason: p.reason })),
+      });
+    }
+    if (req.method === 'POST' && path.startsWith('/api/figures/import') && this.opts.importer) return this.importRequest(req, res, path, this.opts.importer);
+    if (req.method === 'POST' && path === '/api/figures/remove' && this.opts.importer) {
+      const msg = parse(await readBody(req) ?? '');
+      if (typeof msg?.id !== 'string') return json(res, 400, { error: 'bad json' });
+      const out = await this.opts.importer.remove(msg.id);
+      return json(res, 'error' in out ? 400 : 200, out);
+    }
+    if (req.method === 'GET' && path === '/figure-frame') {
+      const host = req.headers.host ?? `127.0.0.1:${this.boundPort}`;
+      // A public tunnel terminates TLS in front of this plain HTTP server, but
+      // frame-ancestors / script-src are matched against the EMBEDDING page's
+      // origin, which is https. Listing only http:// there makes the pet's own
+      // body frame fail on a phone while the desktop http window keeps working.
+      // Allow both schemes for this one host; the sandbox still applies.
+      const self = `http://${host} https://${host}`;
+      // an installed pack (`?pack=<id>`) may fetch its own folder, which never redirects (a CSP path stops holding after
+      // a redirect); a built-in pack, an unknown id or none connects nowhere
+      const id = url.searchParams.get('pack');
+      const packDir = id ? `/packs/${id}/` : '';
+      const own = id && (this.opts.packs?.() ?? []).some((p) => p.id === id && !p.builtin)
+        ? `http://${host}${packDir} https://${host}${packDir}` : "'none'";
+      return this.sendFile(res, join(this.opts.webDir, 'figure-frame.html'), [
+        'sandbox allow-scripts', "default-src 'none'", `script-src ${self}`, `img-src ${self} data: blob:`, "style-src 'unsafe-inline'", `connect-src ${own}`,
+        // the pet page holds it, and the console that shows the pet page in its own frames (another local port) is an ancestor too
+        `frame-ancestors ${self} http://127.0.0.1:* http://localhost:* https://127.0.0.1:* https://localhost:*`,
+      ].join('; '));
+    }
+    if (req.method === 'GET' && path.startsWith('/packs/')) {
+      const [, , id, ...rest] = path.split('/');
+      const pack = (this.opts.packs?.() ?? []).find((p) => p.id === id && !p.builtin);
+      const full = pack ? packFile(pack, decodeURIComponent(rest.join('/'))) : null;
+      if (!full) { res.writeHead(404).end(); return; }
+      return this.sendFile(res, full, PACK_CSP, req.headers.origin === 'null');
+    }
+    if (req.method === 'GET' && path === '/api/state') return json(res, 200, this.opts.snapshot());
+    if (req.method === 'GET' && path === '/api/avatar') {
+      const bytes = this.opts.avatarFile ? await readFile(this.opts.avatarFile).catch(() => null) : null;
+      if (!bytes) { res.writeHead(404).end(); return; }
+      res.writeHead(200, { 'content-type': 'image/png', 'cache-control': 'no-cache' }).end(bytes);
+      return;
+    }
+    if (req.method === 'POST' && path === '/api/speech') {
+      const msg = parse(await readBody(req) ?? '');
+      if (!this.opts.speech) { res.writeHead(404).end(); return; }
+      if (typeof msg?.text !== 'string') return json(res, 400, { error: 'bad json' });
+      return json(res, 200, { units: this.opts.speech(msg.text) });
+    }
+    if (req.method === 'POST' && (path === '/api/skin' || path === '/api/prefs')) {
+      const body = await readBody(req);
+      const msg = body ? parse(body) : null;
+      if (!msg) return json(res, 400, { error: 'bad json' });
+      if (path === '/api/skin') this.opts.onSkin(msg.skin);
+      else this.opts.onPrefs(msg);
+      return json(res, 200, { ok: true });
+    }
+    if (req.method !== 'GET') { res.writeHead(405).end(); return; }
+    if (path === '/') { res.writeHead(302, { location: '/pet' }).end(); return; }
+    if (path === '/overlay') {
+      if (!this.overlayEnabled) { res.writeHead(404).end(); return; }
+      return this.sendPage(res, join(this.opts.webDir, 'overlay.html'), req.headers.host ?? '');
+    }
+    const file = PAGES[path] ?? (path.startsWith('/web/') ? path.slice(5) : null);
+    if (!file) { res.writeHead(404).end(); return; }
+    const root = normalize(this.opts.webDir).replace(/[\\/]+$/, '') + sep;
+    const full = normalize(join(root, file));
+    if (!full.startsWith(root)) { res.writeHead(403).end(); return; }
+    if (PAGES[path]) return this.sendPage(res, full, req.headers.host ?? '');
+    return this.sendFile(res, full, null, path.startsWith('/web/') && req.headers.origin === 'null');
+  }
+
+  /**
+   * The phone's native chat page sends a line the same way the pet's own
+   * typing box does: straight into this World as a `text` page message. The bot
+   * receives it with the usual preempt priority and answers through `pet_say`.
+   * ``petConnected`` tells the caller whether a bubble - and therefore a spoken
+   * answer - is reachable right now; the line itself is stored either way.
+   */
+  private async chatSend(req: IncomingMessage, res: ServerResponse): Promise<void> {
+    const body = await readBody(req);
+    const msg = body ? parse(body) : null;
+    const text = typeof msg?.text === 'string' ? msg.text.trim().slice(0, 500) : '';
+    if (!text) { json(res, 400, { ok: false, error: 'empty text' }); return; }
+    this.opts.onPetMessage({ t: 'text', text });
+    json(res, 200, { ok: true, petConnected: this.petConnected });
+  }
+
+  /**
+   * A narrow view of the desktop-pet World's own events for the phone's chat
+   * page: the person's typed lines (`desktop-pet.message`) and the pet's spoken
+   * beats (`desktop-pet.self`), plus the bot's own QQ private replies when it
+   * answers there instead (`qq.self`). QQ groups, notices, figures, tool steps
+   * and every other event stay on the PC. `after` follows the last cursor the
+   * phone already has; without it the most recent lines are returned.
+   */
+  private async chatEvents(res: ServerResponse, url: URL): Promise<void> {
+    const want = clampInt(url.searchParams.get('limit'), 20, 120, 60);
+    // Read the whole event window: Coo answers a phone line with `pet_say`
+    // (desktop-pet.self), but sometimes replies in its QQ private chat
+    // (qq.self) instead. Both belong in the conversation; QQ group messages,
+    // notices, figures and tool steps do not. Core caps this at 1000 (it
+    // reads up to 2000 internally) and the response stays on loopback.
+    const rawLimit = 1000;
+    const after = uintParam(url.searchParams.get('after'));
+    const q = new URLSearchParams({ archive: '1', limit: String(rawLimit) });
+    if (after !== null) q.set('from', String(after));
+    const data = await this.coreJson('/api/events?' + q.toString());
+    if (!data || !Array.isArray(data.events)) { json(res, 502, { ok: false, error: 'core unavailable' }); return; }
+    const events = data.events as Array<Record<string, unknown>>;
+    const lines = chatLines(events);
+    const items = after === null ? lines.slice(-want) : lines.slice(0, want);
+    const latest = Number(data.latest) || 0;
+    const rawEnd = events.length ? Number(events[events.length - 1].cursor) : 0;
+    // `from` pages through raw events. Keep walking while Core says there is
+    // more, and never jump past lines we had to truncate.
+    let next = after !== null && data.hasMore === true && Number.isFinite(rawEnd)
+      ? rawEnd + 1 : latest + 1;
+    if (lines.length > want && items.length) {
+      next = Math.min(next, items[items.length - 1].cursor + 1);
+    }
+    // Never let the caller drift past the newest event: `after` stays at
+    // latest+1 while nothing new arrives, so the next event (latest+1) is
+    // still inside the next `from` window. Advancing it by one each idle poll
+    // would silently skip every future message.
+    if (next > latest + 1) next = latest + 1;
+    json(res, 200, { ok: true, latest, next, items });
+  }
+
+  /** One whitelisted JSON GET to Core's loopback Web UI; null when it is down. */
+  private coreJson(target: string): Promise<Record<string, unknown> | null> {
+    return new Promise((done) => {
+      const upstream = httpRequest({
+        hostname: '127.0.0.1', port: CORE_PORT, path: target, method: 'GET', timeout: 15_000,
+      }, (up) => {
+        const chunks: Buffer[] = [];
+        up.on('data', (c: Buffer) => chunks.push(c));
+        up.on('end', () => {
+          try { done(JSON.parse(Buffer.concat(chunks).toString('utf8')) as Record<string, unknown>); }
+          catch { done(null); }
+        });
+        up.on('error', () => done(null));
+      });
+      upstream.on('timeout', () => upstream.destroy());
+      upstream.on('error', () => done(null));
+      upstream.end();
+    });
+  }
+
+  /**
+   * Forwards one whitelisted request to Core's loopback Web UI. Only the JSON
+   * body goes upstream: no cookies, no auth headers, no arbitrary paths or
+   * query strings. The phone's token was already checked by `allowed()`.
+   */
+  private async proxyCore(req: IncomingMessage, res: ServerResponse, target: string): Promise<void> {
+    const body = req.method === 'POST' ? await readBody(req) : '';
+    if (body === null) { json(res, 400, { error: 'bad body' }); return; }
+    const payload = body ?? '';
+    const upstream = httpRequest({
+      hostname: '127.0.0.1',
+      port: CORE_PORT,
+      path: target,
+      method: req.method,
+      headers: payload ? { 'content-type': 'application/json', 'content-length': String(Buffer.byteLength(payload)) } : {},
+      timeout: 15_000,
+    }, (up) => {
+      res.writeHead(up.statusCode ?? 502, {
+        'content-type': up.headers['content-type'] ?? 'application/json; charset=utf-8',
+        'cache-control': 'no-store',
+      });
+      up.pipe(res);
+    });
+    upstream.on('timeout', () => upstream.destroy());
+    upstream.on('error', () => {
+      if (!res.headersSent) json(res, 502, { error: 'core unavailable' });
+      else res.end();
+    });
+    if (payload) upstream.write(payload);
+    upstream.end();
+  }
+
+  /** A page, its `<html lang>` set to the app language (`zh` as `zh-CN`). */
+  private async sendPage(res: ServerResponse, full: string, host = ''): Promise<void> {
+    const lang = languageTag(this.opts.language?.() ?? 'zh');
+    // the page's socket is on the address it was opened on, which `'self'` alone does not cover for `ws:`
+    const csp = fromAnotherMachine(host)
+      ? PAGE_CSP.replace("connect-src 'self'", `connect-src 'self' ws://${host} wss://${host}`).replace("frame-ancestors 'self'", `frame-ancestors 'self' http://${host} https://${host}`)
+      : PAGE_CSP;
+    try {
+      const html = readTextFile(full).replace(/<html lang="[^"]*"/, `<html lang="${lang}"`);
+      res.writeHead(200, { 'content-type': MIME['.html'], 'cache-control': 'no-cache', 'content-security-policy': csp });
+      res.end(html);
+    } catch {
+      res.writeHead(404).end();
+    }
+  }
+
+  private async importRequest(req: IncomingMessage, res: ServerResponse, path: string, importer: PackImporter): Promise<void> {
+    if (path === '/api/figures/import') {
+      const type = (req.headers['content-type'] ?? '').split(';')[0]!.trim();
+      if (type !== 'application/zip' && type !== BUNDLE_TYPE) return json(res, 415, { error: this.t.importing.zipOrFolder });
+      const bytes = await readBytes(req);
+      if (!bytes) return json(res, 400, { error: this.t.importing.truncated });
+      const files = type === BUNDLE_TYPE ? filesFromBundle(bytes, this.t.importing) : filesFromZip(bytes, this.t.importing);
+      if (typeof files === 'string') return json(res, 400, { error: files });
+      const out = await importer.stage(files, type === BUNDLE_TYPE);
+      return json(res, 'error' in out ? 400 : 200, out);
+    }
+    const body = await readBody(req);
+    const msg = body ? parse(body) : null;
+    if (path === '/api/figures/import/install' && msg && typeof msg.token === 'string' && Array.isArray(msg.dirs)) {
+      const replace = Array.isArray(msg.replace) ? msg.replace.filter((id): id is string => typeof id === 'string') : [];
+      const out = await importer.install(msg.token, msg.dirs.filter((d): d is string => typeof d === 'string'), replace);
+      return json(res, 'error' in out ? 400 : 'conflicts' in out ? 409 : 200, out);
+    }
+    if (path === '/api/figures/import/cancel') { await importer.cancel(); return json(res, 200, { ok: true }); }
+    return json(res, 400, { error: 'bad request' });
+  }
+
+  /** A file with the pages' CSP (or `csp`); `frame` answers the figure frame's CORS request. */
+  private async sendFile(res: ServerResponse, full: string, csp: string | null, frame = false): Promise<void> {
+    try {
+      const bytes = await readFile(full);
+      res.writeHead(200, {
+        'content-type': MIME[extname(full)] ?? 'application/octet-stream',
+        'cache-control': 'no-cache',
+        'content-security-policy': csp ?? PAGE_CSP,
+        'x-content-type-options': 'nosniff',
+        ...(frame ? { 'access-control-allow-origin': 'null',
+                      'access-control-allow-credentials': 'true' } : {}),
+      });
+      res.end(bytes);
+    } catch {
+      res.writeHead(404).end();
+    }
+  }
+}
+
+/** A positive integer query parameter, or null when it is absent/garbage. */
+function uintParam(v: string | null): number | null {
+  if (v === null || !/^\d+$/.test(v)) return null;
+  const n = Number(v);
+  return Number.isSafeInteger(n) && n > 0 ? n : null;
+}
+
+/** An integer query parameter held within [lo, hi], or `fallback`. */
+function clampInt(v: string | null, lo: number, hi: number, fallback: number): number {
+  const n = v === null ? NaN : Number(v);
+  return Number.isFinite(n) ? Math.min(hi, Math.max(lo, Math.floor(n))) : fallback;
+}
+
+type ChatLine = { cursor: number; ts: string; role: 'me' | 'coo'; text: string };
+
+/** The conversation lines among this World's events, in cursor order. */
+function chatLines(events: Array<Record<string, unknown>>): ChatLine[] {
+  const out: ChatLine[] = [];
+  for (const e of events) {
+    if (!e || typeof e !== 'object') continue;
+    const cursor = Number(e.cursor);
+    if (!Number.isFinite(cursor)) continue;
+    const meta = e.meta && typeof e.meta === 'object' ? e.meta as Record<string, unknown> : {};
+    let role: 'me' | 'coo' | null = null;
+    let text = '';
+    if (e.type === 'desktop-pet.message') {
+      role = 'me';
+      text = typeof meta.text === 'string' ? meta.text : '';
+    } else if (e.type === 'desktop-pet.self') {
+      if (meta.kind === 'say' && Array.isArray(meta.beats)) {
+        const beats = meta.beats.map((b) => b && typeof b === 'object' && typeof (b as Record<string, unknown>).text === 'string'
+          ? String((b as Record<string, unknown>).text) : '').filter((s) => s.trim() !== '');
+        role = 'coo';
+        text = beats.join('\n');
+      } else if (meta.kind === 'ask' && typeof meta.question === 'string') {
+        const options = Array.isArray(meta.options) ? meta.options.filter((o): o is string => typeof o === 'string') : [];
+        role = 'coo';
+        text = options.length ? meta.question + '\n' + options.map((o, i) => `${i + 1}. ${o}`).join('\n') : meta.question;
+      }
+    } else if (e.type === 'qq.self') {
+      // The bot answered in its QQ private chat rather than on the pet. Keep
+      // only the spoken text: no QQ ids, message ids or group chats.
+      const conv = meta.conv && typeof meta.conv === 'object' ? meta.conv as Record<string, unknown> : {};
+      if (conv.kind !== 'private') continue;
+      const raw = typeof e.text === 'string' ? e.text : '';
+      const at = raw.lastIndexOf(': ');
+      if (at < 0) continue;
+      role = 'coo';
+      text = raw.slice(at + 2);
+    }
+    text = text.trim();
+    if (role && text) out.push({ cursor, ts: typeof e.ts === 'string' ? e.ts : '', role, text });
+  }
+  return out;
+}
+
+function parse(text: string): PageMessage | null {
+  try {
+    const v = JSON.parse(text) as unknown;
+    return v && typeof v === 'object' && !Array.isArray(v) ? (v as PageMessage) : null;
+  } catch {
+    return null;
+  }
+}
+
+function json(res: ServerResponse, status: number, body: unknown): void {
+  res.writeHead(status, { 'content-type': 'application/json; charset=utf-8' });
+  res.end(JSON.stringify(body));
+}
+
+/** The body of `req`, or null when it is longer than `max` bytes or breaks off. */
+function readBytes(req: IncomingMessage): Promise<Uint8Array | null> {
+  return new Promise((done) => {
+    const chunks: Buffer[] = [];
+    req.on('data', (c: Buffer) => chunks.push(c));
+    req.on('end', () => done(Buffer.concat(chunks)));
+    req.on('error', () => done(null));
+  });
+}
+
+const MAX_BODY = 64 * 1024;
+function readBody(req: IncomingMessage): Promise<string | null> {
+  return new Promise((done) => {
+    let size = 0;
+    const chunks: Buffer[] = [];
+    req.on('data', (c: Buffer) => {
+      size += c.length;
+      if (size > MAX_BODY) { req.destroy(); done(null); return; }
+      chunks.push(c);
+    });
+    req.on('end', () => done(Buffer.concat(chunks).toString('utf8')));
+    req.on('error', () => done(null));
+  });
+}

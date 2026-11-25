@@ -1,0 +1,5 @@
+{
+  "ntfy_topic": "coo-YOUR_TOPIC_ID_HERE",
+  "ntfy_url": "https://ntfy.sh/coo-YOUR_TOPIC_ID_HERE",
+  "use_key_when_available": true
+}

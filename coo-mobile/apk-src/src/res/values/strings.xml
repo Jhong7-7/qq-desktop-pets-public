@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Coo 控制台</string>
+    <string name="chat_title">和 Coo 说话</string>
+    <string name="acc_label">Coo 桌宠键盘跟随</string>
+    <string name="acc_desc">让桌宠在输入法弹出时自动跳到键盘上方，收起后回到原位。只读取输入法窗口的位置和高度，不读取屏幕文字与内容，不联网、不上传任何数据。</string>
+</resources>

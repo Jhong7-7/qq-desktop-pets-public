@@ -1,0 +1,5 @@
+{
+  "_howto": "注册免费账号 https://dashboard.ngrok.com/signup 后，把 authtoken（Get Started → Your authtoken）和免费静态域名（Domains 页面，形如 xxxx.ngrok-free.app）填好，将本文件另存为 ngrok-config.json，然后重启隧道管理器。删掉这个文件即可回到 cloudflared 模式。",
+  "authtoken": "",
+  "domain": ""
+}
