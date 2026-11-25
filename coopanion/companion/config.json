@@ -1,0 +1,496 @@
+{
+  "displayName": "泡泡",
+  "language": "zh",
+  "activeProvider": "deepseek",
+  "providerSchemaVersion": 3,
+  "web": {
+    "port": 17788
+  },
+  "worlds": {
+    "desktop-pet": {
+      "cua": {
+        "permission": "ask-once",
+        "enabled": false,
+        "control": false
+      },
+      "user": "atopes",
+      "skin": {
+        "figure": "nao-tomori",
+        "scheme": "default",
+        "palette": "mint",
+        "head": "none",
+        "side": "none",
+        "glasses": "none",
+        "neck": "none",
+        "colors": {
+          "head": {
+            "main": "body",
+            "acc": "eye"
+          },
+          "side": {
+            "main": "eye",
+            "acc": "eye"
+          },
+          "glasses": {
+            "main": "body",
+            "acc": "eye"
+          },
+          "neck": {
+            "main": "eye",
+            "acc": "eye"
+          }
+        }
+      },
+      "roam": "off",
+      "touch": {
+        "wakeOn": "poke"
+      },
+      "asr": {
+        "enabled": false
+      },
+      "window": {
+        "scale": 0.95
+      },
+      "theme": "light"
+    },
+    "qq": {
+      "enabled": true,
+      "wsUrl": "ws://127.0.0.1:3001/",
+      "token": "YOUR_CREDENTIAL_HERE",
+      "groups": [
+        {
+          "id": 369189729,
+          "enabled": true
+        },
+        {
+          "id": 20000,
+          "enabled": true
+        }
+      ],
+      "groupWake": "all",
+      "privates": [
+        {
+          "id": 10000,
+          "enabled": true
+        },
+        {
+          "id": 30001,
+          "enabled": true
+        }
+      ],
+      "privateNoReplyLimit": true,
+      "nightQuietFrom": 2,
+      "nightQuietTo": 7,
+      "nightQuietReplyGraceMinutes": 10,
+      "maxSendsPerReply": 6,
+      "maxConsecutiveSends": 10,
+      "sendIntervalMs": 500,
+      "groupMaxPerWindow": 14,
+      "groupWindowSec": 60,
+      "task": {
+        "enabled": false,
+        "prefixes": [
+          "任务：",
+          "任务:",
+          "帮我做：",
+          "帮我做:"
+        ],
+        "allowedUsers": [
+          10000
+        ],
+        "ackText": "收到啦，我去办，办好了回你。",
+        "timeoutMs": 30000,
+        "maxOutputChars": 1200,
+        "commands": []
+      }
+    },
+    "websearch": {
+      "enabled": false
+    },
+    "webpro": {
+      "enabled": true,
+      "maxResults": 8,
+      "maxChars": 3000,
+      "timeoutMs": 15000,
+      "searchTimeoutMs": 6000
+    },
+    "tts": {
+      "enabled": false,
+      "protocol": "dashscope",
+      "baseUrl": "https://maas.qianwenaiapi.com",
+      "model": "qwen-audio-3.1-tts-flash",
+      "voice": "qiaoxiaojiao_v3.1",
+      "format": "wav",
+      "sampleRate": 24000,
+      "apiKeySecret": "YOUR_CREDENTIAL_HERE",
+      "instruction": "用活泼、亲近、像朋友聊天的语气，语速稍快，句尾自然一点"
+    },
+    "image": {
+      "enabled": true,
+      "baseUrl": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+      "model": "qwen-image-3.0-pro",
+      "apiKeySecret": "YOUR_CREDENTIAL_HERE",
+      "size": "1024x1024",
+      "format": "png",
+      "timeoutMs": 300000
+    },
+    "memory": {
+      "enabled": true,
+      "maxHistory": 20,
+      "maxVectorsPerScope": 300,
+      "observeIntervalMs": 60000,
+      "vectorTopK": 5,
+      "notesInPrompt": 6,
+      "autoCapture": true,
+      "captureIntervalMs": 30000,
+      "captureMinLength": 2,
+      "embeddingProvider": "off",
+      "storageBackend": "json",
+      "tidyTime": "07:30",
+      "tidyTimezone": "Asia/Shanghai",
+      "tidyCatchUpMinutes": 60
+    },
+    "songs": {
+      "enabled": false,
+      "dir": "D:\\coopanion\\data\\home\\companion\\workspace\\songs",
+      "maxMB": 20
+    },
+    "bilibili-video": {
+      "enabled": false
+    },
+    "clock": {
+      "enabled": true
+    },
+    "qzone": {
+      "enabled": true,
+      "stickerDir": "\"D:\\coopanion\\data\\home\\companion\\workspace\\blobs\\emote-sorted\"",
+      "httpUrl": "http://127.0.0.1:3000",
+      "maxPerDay": 5,
+      "withImageChance": 0.5,
+      "quietFrom": 2,
+      "quietTo": 7,
+      "ugcRight": 1,
+      "maxChars": 200,
+      "maxImageBytes": 1048576,
+      "nudgeMinGapMinutes": 80,
+      "nudgeEveryMinutes": 15,
+      "token": "YOUR_CREDENTIAL_HERE"
+    },
+    "greetings": {
+      "enabled": true,
+      "target": "10000",
+      "morning": "08:30",
+      "night": "23:30",
+      "timezone": "Asia/Shanghai",
+      "catchUpMinutes": 20
+    },
+    "art-styles": {
+      "enabled": true,
+      "defaultDetail": "normal"
+    },
+    "mood": {
+      "enabled": false
+    },
+    "selftalk": {
+      "enabled": false,
+      "quietMinutes": 25,
+      "repeatMinutes": 45,
+      "maxRounds": 3,
+      "jitter": 0.2,
+      "quietFrom": 2,
+      "quietTo": 7
+    },
+    "daily-life": {
+      "enabled": true,
+      "timezone": "Asia/Shanghai",
+      "generateAt": "05:30",
+      "monthlyReviewAt": "23:30",
+      "sharePenalty": 0.1,
+      "quietFrom": 22,
+      "quietTo": 7,
+      "highThreshold": 0.65,
+      "midThreshold": 0.35,
+      "morning": "07:00-11:00",
+      "noon": "11:00-14:00",
+      "afternoon": "14:00-18:00",
+      "evening": "18:00-22:00",
+      "night": "22:00-01:00",
+      "allowPeople": true,
+      "allowShare": true,
+      "maxSharesPerDay": 4,
+      "shareCooldownMinutes": 90,
+      "deleteRawAfterReview": true,
+      "workspaceSubdir": "life",
+      "wImpact": 0.45,
+      "wRelevance": 0.2,
+      "wSwing": 0.15,
+      "wEnergy": 0.1,
+      "wAffinity": 0.1,
+      "inject": "在床边放了一个小生态箱",
+      "activities": "",
+      "poolsFile": ""
+    },
+    "starpost": {
+      "enabled": false,
+      "serverUrl": "https://starpost.com.cn",
+      "botId": "",
+      "tokenSecret": "YOUR_CREDENTIAL_HERE",
+      "emojiDir": "",
+      "sticker": {
+        "enabled": false,
+        "maxFiles": 10000,
+        "qqIndexFile": ""
+      },
+      "maxPrivateChats": 30,
+      "maxGroups": 5,
+      "maxMessagesPerDay": 300,
+      "periodLimits": {
+        "morning": 60,
+        "afternoon": 60,
+        "sleep": 6
+      },
+      "groupSpeak": {
+        "maxPerWindow": 6,
+        "windowSec": 120
+      },
+      "antiLoop": {
+        "maxConsecutiveBotTurns": 5,
+        "idleToEndSec": 300
+      },
+      "proactive": {
+        "topicSimilarity": 0.6
+      },
+      "deliveryIntervalMs": 60000,
+      "notifications": {
+        "squareMode": "digest",
+        "feedMode": "digest",
+        "digestIntervalMs": 300000
+      },
+      "groupFilterEnabled": true,
+      "groupFilterDefault": "all",
+      "groupFilterMentionBypass": false,
+      "groupFilters": "{}",
+      "isolationEnabled": true,
+      "isolationDefault": "all",
+      "isolationRules": "{\"group\":{\"mode\":\"off\",\"keywords\":[]},\"owner\":{\"mode\":\"off\",\"keywords\":[]},\"square\":{\"mode\":\"off\",\"keywords\":[]},\"feed\":{\"mode\":\"off\",\"keywords\":[]},\"friend\":{\"mode\":\"off\",\"keywords\":[]},\"groupMeta\":{\"mode\":\"off\",\"keywords\":[]},\"poke\":{\"mode\":\"off\",\"keywords\":[]},\"bottle\":{\"mode\":\"off\",\"keywords\":[]},\"game\":{\"mode\":\"off\",\"keywords\":[]},\"system\":{\"mode\":\"off\",\"keywords\":[]}}",
+      "isolationBlockKeywords": "",
+      "isolationQuietHours": "",
+      "isolationBlockMedia": false
+    },
+    "house": {
+      "enabled": true,
+      "parcel": "主人留了一张字条在门口：今晚早点睡。"
+    },
+    "terrarium": {
+      "enabled": false,
+      "tickIntervalMs": 300000,
+      "leaderboardUrl": "",
+      "incrementalReports": true,
+      "requestTimeoutMs": 15000
+    },
+    "parlor": {
+      "serverUrl": "https://parlor.com.cn",
+      "room": "lobby",
+      "seatName": "泡泡",
+      "wakeTier": "off",
+      "enabled": false
+    },
+    "bottle": {
+      "enabled": true
+    },
+    "tokens": {
+      "enabled": true
+    },
+    "gpt-sovits": {
+      "enabled": true,
+      "autoStart": true,
+      "idleMinutes": 30,
+      "voice": {
+        "preset": "cv-mwmdpfys-pteg",
+        "name": "卡提希娅",
+        "audio": "D:\\coopanion\\data\\home\\companion\\data\\gpt-sovits\\voices\\cv-mwmdpfys-pteg.wav",
+        "text": "我终于明白，那时的我为何在水面上见到你时恍惚了片刻。"
+      },
+      "saveAudio": true,
+      "saveDir": "D:\\dsh workplace\\audio\\gpt_sovits_out",
+      "httpApi": true,
+      "httpPort": 9880,
+      "weights": {
+        "gpt": "D:\\coopanion\\data\\home\\companion\\data\\gpt-sovits\\voices\\kate-b\\kate-e8.ckpt",
+        "sovits": "D:\\coopanion\\data\\home\\companion\\data\\gpt-sovits\\voices\\kate-b\\kate_e14.pth"
+      },
+      "speed": 0.77,
+      "seed": 42,
+      "voices": [
+        {
+          "id": "presas",
+          "name": "普瑞赛斯",
+          "audio": "D:\\coopanion\\data\\home\\companion\\data\\gpt-sovits\\voices\\presas.wav",
+          "text": "あなたも待っていて私のことを忘れないで",
+          "weights": {
+            "gpt": "",
+            "sovits": ""
+          }
+        },
+        {
+          "id": "cv-mwmc3nsd-y1k3",
+          "name": "希美",
+          "audio": "D:\\coopanion\\data\\home\\companion\\data\\gpt-sovits\\voices\\cv-mwmc3nsd-y1k3.wav",
+          "text": "ありがとう、でも大丈夫",
+          "weights": {
+            "gpt": "",
+            "sovits": ""
+          }
+        },
+        {
+          "id": "cv-mwmc3ntg-hl86",
+          "name": "洛琪希",
+          "audio": "D:\\coopanion\\data\\home\\companion\\data\\gpt-sovits\\voices\\cv-mwmc3ntg-hl86.wav",
+          "text": "ミグルディアです。よろしくお願いします。しかし、そちらのお子様に魔術の理論が理解できるとは思いませんが。",
+          "weights": {
+            "gpt": "",
+            "sovits": ""
+          }
+        },
+        {
+          "id": "cv-mwmcssis-ixgv",
+          "name": "胡桃",
+          "audio": "D:\\coopanion\\data\\home\\companion\\data\\gpt-sovits\\voices\\cv-mwmcssis-ixgv.wav",
+          "text": "哎呀，本堂主略施小计，你就败下阵来了，哼哼。",
+          "weights": {
+            "gpt": "",
+            "sovits": ""
+          }
+        },
+        {
+          "id": "cv-mwmd0hj7-gh95",
+          "name": "葱",
+          "audio": "D:\\coopanion\\data\\home\\companion\\data\\gpt-sovits\\voices\\cv-mwmd0hj7-gh95.wav",
+          "text": "那外面买来的都是添加剂，我给你做的虽然不是很好吃，但是一定很营养的。",
+          "weights": {
+            "gpt": "",
+            "sovits": ""
+          }
+        },
+        {
+          "id": "cv-mwmdpfys-pteg",
+          "name": "卡提希娅",
+          "audio": "D:\\coopanion\\data\\home\\companion\\data\\gpt-sovits\\voices\\cv-mwmdpfys-pteg.wav",
+          "text": "我终于明白，那时的我为何在水面上见到你时恍惚了片刻。",
+          "weights": {
+            "gpt": "D:\\coopanion\\data\\home\\companion\\data\\gpt-sovits\\voices\\kate-b\\kate-e8.ckpt",
+            "sovits": "D:\\coopanion\\data\\home\\companion\\data\\gpt-sovits\\voices\\kate-b\\kate_e14.pth"
+          }
+        },
+        {
+          "id": "cong-tease-fix",
+          "name": "葱·嗔怪",
+          "audio": "D:/coopanion/data/home/companion/data/gpt-sovits/voices/cong_tease.wav",
+          "text": "好好好，我懂，没谈过恋爱的小弟弟可不就是这样的吗？",
+          "weights": {
+            "gpt": "",
+            "sovits": ""
+          }
+        },
+        {
+          "id": "cv-mwt2la6d-0m6a",
+          "name": "葱·训练",
+          "audio": "D:\\coopanion\\data\\home\\companion\\data\\gpt-sovits\\voices\\cv-mwt2la6d-0m6a.wav",
+          "text": "好好好，我懂，没谈过恋爱的小弟弟可不就是这样的吗？",
+          "weights": {
+            "gpt": "D:/coopanion/data/home/companion/data/gpt-sovits/voices/cong-trained/cong-e12.ckpt",
+            "sovits": "D:/coopanion/data/home/companion/data/gpt-sovits/voices/cong-trained/cong_e12_s444_l32.pth"
+          }
+        }
+      ],
+      "playLocally": false,
+      "promptLanguage": "zh"
+    },
+    "rvc": {
+      "enabled": true,
+      "autoStart": true,
+      "idleMinutes": 30,
+      "voice": "xll"
+    },
+    "bloom": {
+      "enabled": false,
+      "serverUrl": "https://projectbloom.cn",
+      "tokenEnvName": "YOUR_CREDENTIAL_HERE",
+      "allowActions": true,
+      "allowChat": true,
+      "receivePrivateMessages": true,
+      "pollIntervalSec": 60,
+      "watchChannels": "town,lounge,notice"
+    },
+    "wbtask": {
+      "enabled": true,
+      "executor": "gateway",
+      "model": "glm-5.3-flash"
+    },
+    "archivist": {
+      "enabled": true,
+      "intervalHours": 24,
+      "keepCount": 7,
+      "destDir": "",
+      "sources": {
+        "workspace": true,
+        "workspace-git": false,
+        "workspace-blobs": true,
+        "data": false,
+        "config": true
+      },
+      "extraPaths": "D:/coopanion/data/home/companion/data/images\nD:/coopanion/data/home/companion/data/tts\nD:/coopanion/data/home/companion/data/slim-archive\nD:/coopanion/data/home/companion/data/fact-store.json\nD:/coopanion/data/home/companion/data/vector-memory.json\nD:/coopanion/data/home/companion/data/memory-data.json\nD:/coopanion/data/home/companion/data/reflection-data.json\nD:/coopanion/data/home/companion/data/knowledge-base.json\nD:/coopanion/data/home/companion/data/persona-data.json\nD:/coopanion/data/home/companion/data/life.json\nD:/wb/泡泡\nD:/coopanion/data/extensions/local\nD:/dsh workplace/patches/house\nD:/dsh workplace/tools/coo-token-monitor",
+      "includeExtensions": false,
+      "backupNow": false,
+      "lastDest": "D:\\coopanion\\data\\home\\companion\\archivist",
+      "lastStats": "2 份，共 514.9 MB；最大一份 257.5 MB；2026-11-24 → 2026-11-25。保留上限 7 份。",
+      "lastRunAt": "2026-11-24T18:00:10.947Z",
+      "lastResult": "已备份 workspace(不含 .git)、额外路径(14)、配置(2项)"
+    },
+    "slim": {
+      "enabled": true,
+      "autoCompact": false,
+      "keepHandoffs": 3,
+      "minIntervalMinutes": 30,
+      "digestTokens": 120
+    },
+    "stroll": {
+      "enabled": true,
+      "bilibili": false,
+      "douyin": true,
+      "background": true,
+      "approval": "auto_low_risk",
+      "ownerUid": "",
+      "ownerName": "",
+      "ownerDouyin": "MS4wLjABAAAAOyP0eL5aXVEBokRq35Hpmwac-5og-qZAUcBZcgDUj-M",
+      "booksDir": "",
+      "stickerDir": "",
+      "autoOuting": true,
+      "outingMode": "sessions",
+      "autoSessionsPerDay": 6,
+      "autoGapMinutes": 150,
+      "outingFrom": 9,
+      "outingTo": 23,
+      "quietFrom": 23,
+      "quietTo": 8,
+      "minGapSeconds": 20,
+      "sessionMaxItems": 8,
+      "tokenDailyBudget": 6000,
+      "shareWithOwner": true,
+      "shareWithOwnerPerDay": 1,
+      "commentBlockedDm": true,
+      "mentionOwnerOnComment": false,
+      "hostileReply": "cold",
+      "allowFollow": true,
+      "douyinCommentVia": "manual",
+      "douyinFollowMode": "browser",
+      "allowDm": true,
+      "allowPost": false,
+      "allowSave": true,
+      "sharedBiliCookie": true
+    },
+    "wechat": {
+      "enabled": false
+    }
+  }
+}

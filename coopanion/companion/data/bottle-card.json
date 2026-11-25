@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "base": "http://127.0.0.1:7796",
+  "eyebrow": "漂流瓶 · 写好了",
+  "from": "等你决定",
+  "title": "讲过的那个",
+  "body": "半夜有人让我讲故事。讲到一半被打断：这个你讲过了。我愣住——原来他记着我说的每一句。被人记住的从来不是故事，是讲故事的那个。",
+  "meta": "62 / 120 字",
+  "hints": [],
+  "actions": [
+    {
+      "id": "send",
+      "label": "寄出去",
+      "tone": "primary"
+    },
+    {
+      "id": "rewrite",
+      "label": "重写",
+      "tone": "ghost"
+    },
+    {
+      "id": "discard",
+      "label": "算了吧",
+      "tone": "ghost"
+    }
+  ],
+  "sound": null,
+  "appearance": {
+    "preference": {
+      "theme": "ocean",
+      "mode": "system",
+      "customColor": "#4b62a0",
+      "background": null,
+      "backgroundTransparency": 82,
+      "myFont": null,
+      "myFontName": ""
+    },
+    "palettes": {
+      "light": {
+        "paper": "#f0f4fb",
+        "card": "#fffefa",
+        "ink": "#25334f",
+        "muted": "#65748b",
+        "line": "#d9e1ed",
+        "accent": "#4b62a0",
+        "seal": "#4b60a2",
+        "sea": "#37758e",
+        "soft": "#eaf0f8",
+        "panel": "#f8faff",
+        "on-accent": "#ffffff",
+        "warning-bg": "#fbf2df",
+        "warning-line": "#e9d9b5",
+        "warning-text": "#795a25",
+        "danger-text": "#92483f"
+      },
+      "dark": {
+        "paper": "#151d2e",
+        "card": "#202c41",
+        "ink": "#e5ecf7",
+        "muted": "#acbad1",
+        "line": "#37475e",
+        "accent": "#a9bdf5",
+        "seal": "#a9bdf5",
+        "sea": "#9ed3e5",
+        "soft": "#26344b",
+        "panel": "#1c283c",
+        "on-accent": "#18263e",
+        "warning-bg": "#3c3021",
+        "warning-line": "#70583a",
+        "warning-text": "#ebce92",
+        "danger-text": "#f0b2ae"
+      }
+    }
+  }
+}

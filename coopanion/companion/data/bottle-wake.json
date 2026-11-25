@@ -1,0 +1,232 @@
+{
+  "version": 1,
+  "day": "2026-11-25",
+  "lastInviteAt": 1795388028045,
+  "active": null,
+  "lanes": {
+    "write": {
+      "nextAt": null,
+      "count": 0,
+      "paused": false,
+      "declined": false,
+      "failed": false,
+      "intervalHours": 2,
+      "dayLimit": 3
+    },
+    "catch": {
+      "nextAt": null,
+      "count": 0,
+      "paused": false,
+      "declined": false,
+      "failed": false,
+      "intervalHours": 2,
+      "dayLimit": 3
+    },
+    "remind": {
+      "nextAt": null,
+      "count": 0,
+      "paused": false,
+      "declined": false,
+      "failed": false,
+      "intervalHours": 0.5,
+      "dayLimit": 12
+    }
+  },
+  "cooldowns": {
+    "write": 1794678725225
+  },
+  "history": [
+    {
+      "id": "d5689137-b04a-4dd0-8227-0cc033a2ea46",
+      "action": "remind",
+      "attempts": 1,
+      "result": "completed",
+      "reason": "reminder_delivered",
+      "at": 1794768299914
+    },
+    {
+      "id": "e8444a3e-4ab9-475a-a7aa-e131c2e16dbe",
+      "action": "remind",
+      "attempts": 1,
+      "result": "completed",
+      "reason": "reminder_delivered",
+      "at": 1794773280860
+    },
+    {
+      "id": "8dfe75ea-47d3-4365-ae5b-c8ec72611381",
+      "action": "remind",
+      "attempts": 1,
+      "result": "completed",
+      "reason": "reminder_delivered",
+      "at": 1794775501053
+    },
+    {
+      "id": "fdb2a53d-07c2-4dc8-9f48-eb5453d0a4b3",
+      "action": "catch",
+      "attempts": 1,
+      "result": "deferred",
+      "reason": "not_now",
+      "at": 1794791284192
+    },
+    {
+      "id": "da0a8f84-d6eb-4435-a032-cd251d566fdf",
+      "action": "write",
+      "attempts": 1,
+      "result": "completed",
+      "reason": "tool_succeeded",
+      "at": 1794794885706
+    },
+    {
+      "id": "315339d0-04ae-48f4-8f60-a279ccec58c2",
+      "action": "catch",
+      "attempts": 1,
+      "result": "deferred",
+      "reason": "not_now",
+      "at": 1794959467617
+    },
+    {
+      "id": "39b42641-cd46-45c8-a1c5-338dbd9f4c10",
+      "action": "write",
+      "attempts": 1,
+      "result": "uncompleted",
+      "reason": "no_result",
+      "at": 1794959527272
+    },
+    {
+      "id": "39b42641-cd46-45c8-a1c5-338dbd9f4c10",
+      "action": "write",
+      "attempts": 2,
+      "result": "completed",
+      "reason": "tool_succeeded",
+      "at": 1794962346229
+    },
+    {
+      "id": "4bd86ccd-2ba6-4b4b-b646-99d6daeac122",
+      "action": "catch",
+      "attempts": 1,
+      "result": "completed",
+      "reason": "tool_succeeded",
+      "at": 1795285221880
+    },
+    {
+      "id": "f0005d74-1262-43d7-8c10-1c689e60cfb7",
+      "action": "remind",
+      "attempts": 1,
+      "result": "completed",
+      "reason": "reminder_delivered",
+      "at": 1795288825826
+    },
+    {
+      "id": "d39c060c-ca73-445e-bedd-88c18f431143",
+      "action": "remind",
+      "attempts": 1,
+      "result": "completed",
+      "reason": "reminder_delivered",
+      "at": 1795292122430
+    },
+    {
+      "id": "3a485ca6-afaf-4245-abf1-ab90468832bf",
+      "action": "remind",
+      "attempts": 1,
+      "result": "completed",
+      "reason": "reminder_delivered",
+      "at": 1795295602513
+    },
+    {
+      "id": "2382983f-0014-4bbc-913a-0801106dc58f",
+      "action": "remind",
+      "attempts": 1,
+      "result": "completed",
+      "reason": "reminder_delivered",
+      "at": 1795299026355
+    },
+    {
+      "id": "f62fe7a1-8f78-4239-a54a-9bb97160440f",
+      "action": "remind",
+      "attempts": 1,
+      "result": "completed",
+      "reason": "reminder_delivered",
+      "at": 1795301783423
+    },
+    {
+      "id": "5c03451e-b387-4b79-9f49-58efb171fda9",
+      "action": "remind",
+      "attempts": 1,
+      "result": "completed",
+      "reason": "reminder_delivered",
+      "at": 1795304963638
+    },
+    {
+      "id": "e652def6-c20b-4160-bd7b-aa7a3dce52d8",
+      "action": "remind",
+      "attempts": 1,
+      "result": "completed",
+      "reason": "reminder_delivered",
+      "at": 1795307123467
+    },
+    {
+      "id": "74e35d56-8c67-488e-a3ea-2297cbf73683",
+      "action": "remind",
+      "attempts": 1,
+      "result": "completed",
+      "reason": "reminder_delivered",
+      "at": 1795309524169
+    },
+    {
+      "id": "e4e23084-ec45-49f0-a181-4078f13ce28d",
+      "action": "remind",
+      "attempts": 1,
+      "result": "completed",
+      "reason": "reminder_delivered",
+      "at": 1795312764527
+    },
+    {
+      "id": "2364aad9-a0aa-4722-86e6-2de039c6a857",
+      "action": "remind",
+      "attempts": 1,
+      "result": "completed",
+      "reason": "reminder_delivered",
+      "at": 1795315826744
+    },
+    {
+      "id": "3a59a631-299a-4532-bf65-6c98cec58efa",
+      "action": "remind",
+      "attempts": 1,
+      "result": "completed",
+      "reason": "reminder_delivered",
+      "at": 1795319246109
+    },
+    {
+      "id": "7d73e84a-8b9a-4894-9688-0b1aedde7435",
+      "action": "remind",
+      "attempts": 1,
+      "result": "completed",
+      "reason": "reminder_delivered",
+      "at": 1795322307314
+    },
+    {
+      "id": "d325297e-3ec5-4d0a-923a-29cec543de27",
+      "action": "remind",
+      "attempts": 1,
+      "result": "completed",
+      "reason": "reminder_delivered",
+      "at": 1795369309133
+    },
+    {
+      "id": "937622b2-ec9b-4165-962a-9f505b4a926b",
+      "action": "catch",
+      "attempts": 1,
+      "result": "deferred",
+      "reason": "not_now",
+      "at": 1795384429793
+    },
+    {
+      "id": "58b9fdb6-7181-4a6e-a4a0-d114ba3a6967",
+      "action": "write",
+      "attempts": 1,
+      "result": "completed",
+      "reason": "tool_succeeded",
+      "at": 1795388030281
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "cortico-world-greetings",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "description": "定时问候：每天固定时刻推一条能唤醒她的事件，让她自己决定要不要给主人发消息。只读本地时钟，不联网、不调模型。",
+  "main": "./src/index.js",
+  "exports": { ".": "./src/index.js" },
+  "engines": { "node": ">=22" },
+  "files": ["src", "describe.json"],
+  "cortico": {
+    "kind": "world",
+    "api": 6,
+    "displayName": "定时问候",
+    "describe": "describe.json"
+  }
+}

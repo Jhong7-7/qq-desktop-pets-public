@@ -1,0 +1,23 @@
+{
+  "name": "cortico-world-wechat",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "description": "Cortico World: 个人微信小号接入（WS 连 wechat_bridge）。自带 DeepSeek 客户端与友利奈绪人设，记忆按群独立。",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "cortico": {
+    "kind": "world",
+    "api": 6,
+    "displayName": "微信"
+  }
+}

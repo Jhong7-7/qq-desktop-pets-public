@@ -1,0 +1,17 @@
+{
+  "name": "cortico-world-art-styles",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "description": "画风包：把风格名 + 精细度 + 比例翻成可直接给 image_draw 的 prompt / size / quality。只读本地 JSON，不联网、不调模型。",
+  "main": "./src/index.js",
+  "exports": { ".": "./src/index.js" },
+  "engines": { "node": ">=22" },
+  "files": ["src", "describe.json"],
+  "cortico": {
+    "kind": "world",
+    "api": 6,
+    "displayName": "画风包",
+    "describe": "describe.json"
+  }
+}

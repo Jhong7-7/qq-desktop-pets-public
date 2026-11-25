@@ -1,0 +1,32 @@
+{
+  "name": "cortico-world-wbtask",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "description": "把 WorkBuddy 接成泡泡的手：她可以把一句话交出去，由本机 WorkBuddy 代办，办完再回来告诉她结果。独立运行，不依赖 QQ 世界。",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "keywords": [
+    "cortico-world",
+    "cortico",
+    "workbuddy",
+    "task"
+  ],
+  "files": [
+    "src",
+    "describe.json",
+    "ENV_PROMPT.md",
+    "README.md"
+  ],
+  "cortico": {
+    "kind": "world",
+    "api": 6,
+    "displayName": "WorkBuddy 任务",
+    "describe": "describe.json"
+  }
+}

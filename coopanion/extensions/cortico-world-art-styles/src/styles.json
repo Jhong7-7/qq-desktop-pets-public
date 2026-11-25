@@ -1,0 +1,55 @@
+{
+  "groups": [
+    { "id": "anime", "label": "日系" },
+    { "id": "real", "label": "写实" },
+    { "id": "paint", "label": "绘画" },
+    { "id": "design", "label": "设计" }
+  ],
+  "styles": {
+    "anime": { "label": "日漫", "group": "anime", "note": "通用日漫，最常用", "prompt": "anime style, japanese anime illustration, clean line art, cel shading, vibrant colors, detailed eyes" },
+    "anime-cel": { "label": "赛璐璐", "group": "anime", "note": "动画截图的平涂感", "prompt": "cel shading, flat color blocks, crisp outlines, anime screencap style, two-tone shading" },
+    "anime-thick": { "label": "厚涂", "group": "anime", "note": "半写实厚涂，光影重", "prompt": "thick painterly anime style, impasto brushwork, rich shading, semi-realistic anime, dramatic lighting" },
+    "chibi": { "label": "Q版", "group": "anime", "note": "大头小身，适合表情包", "prompt": "chibi, super deformed, cute, big head small body, soft colors, anime style" },
+    "shojo": { "label": "少女漫", "group": "anime", "note": "闪亮、花、细腻线条", "prompt": "shoujo manga style, sparkles, floral motifs, delicate lineart, soft pastel palette, expressive eyes" },
+    "ukiyoe": { "label": "浮世绘", "group": "anime", "note": "木版画、粗轮廓", "prompt": "ukiyo-e woodblock print, flat colors, bold outlines, wave patterns, edo period aesthetic" },
+    "pixel": { "label": "像素", "group": "anime", "note": "复古游戏精灵图", "prompt": "pixel art, 32-bit, limited palette, crisp pixels, retro game sprite" },
+
+    "photo": { "label": "人像摄影", "group": "real", "note": "85mm、浅景深", "prompt": "professional portrait photography, 85mm lens, soft window light, shallow depth of field, skin detail" },
+    "cinematic": { "label": "电影感", "group": "real", "note": "宽银幕、青橙调", "prompt": "cinematic still, anamorphic lens, teal and orange grade, dramatic key light, film grain" },
+    "film": { "label": "胶片", "group": "real", "note": "35mm 暖调颗粒", "prompt": "35mm film photo, kodak portra, warm halation, natural grain, soft contrast" },
+    "mono": { "label": "黑白", "group": "real", "note": "银盐、高反差", "prompt": "black and white photography, high contrast, deep shadows, silver gelatin print" },
+    "neon-night": { "label": "夜景霓虹", "group": "real", "note": "雨夜、霓虹反光", "prompt": "night city, neon signs, wet asphalt reflections, cyberpunk lighting, bokeh" },
+    "macro": { "label": "微距", "group": "real", "note": "极近特写、纹理", "prompt": "macro photography, extreme close-up, shallow focus, intricate texture detail" },
+
+    "watercolor": { "label": "水彩", "group": "paint", "note": "湿画法、纸纹", "prompt": "watercolor painting, wet washes, soft edges, paper texture, delicate color bleeding" },
+    "oil": { "label": "油画", "group": "paint", "note": "厚笔触、古典", "prompt": "oil painting, visible brushstrokes, rich impasto, classical composition, warm varnish tones" },
+    "ink": { "label": "水墨", "group": "paint", "note": "写意、留白", "prompt": "chinese ink wash painting, xieyi, rice paper texture, minimal color, elegant negative space" },
+    "gongbi": { "label": "工笔", "group": "paint", "note": "细笔、矿物色", "prompt": "gongbi chinese painting, fine meticulous brushwork, mineral pigments, silk texture, intricate detail" },
+    "colored-pencil": { "label": "彩铅", "group": "paint", "note": "排线、纸面颗粒", "prompt": "colored pencil drawing, visible pencil hatching, paper grain, soft layered colors" },
+    "pastel": { "label": "粉彩", "group": "paint", "note": "粉质、柔和过渡", "prompt": "soft pastel drawing, powdery texture, muted palette, gentle gradients" },
+    "printmaking": { "label": "版画", "group": "paint", "note": "木刻粗线、套色", "prompt": "woodcut printmaking, bold carved lines, limited ink colors, paper texture" },
+    "lineart": { "label": "线稿", "group": "paint", "note": "纯线、白底", "prompt": "clean line art, monochrome ink lines, hatching for shading, white background, concept sketch" },
+
+    "flat": { "label": "扁平插画", "group": "design", "note": "几何色块、编辑风", "prompt": "flat vector illustration, bold shapes, limited palette, subtle grain, editorial style" },
+    "guochao": { "label": "国潮", "group": "design", "note": "红金、传统纹样", "prompt": "guochao style, chinese traditional motifs, bold red and gold, modern graphic layout, auspicious patterns" },
+    "cyberpunk": { "label": "赛博朋克", "group": "design", "note": "全息、体积雾", "prompt": "cyberpunk, holographic accents, chrome, volumetric fog, magenta and cyan lighting" },
+    "vaporwave": { "label": "蒸汽波", "group": "design", "note": "粉紫渐变、网格", "prompt": "vaporwave aesthetic, pastel gradients, grid horizon, chrome statue, 80s retro" },
+    "clay3d": { "label": "3D黏土", "group": "design", "note": "圆润、棚拍光", "prompt": "claymation 3d render, soft clay texture, rounded shapes, studio lighting, cute" },
+    "lowpoly": { "label": "低多边形", "group": "design", "note": "切面几何", "prompt": "low poly 3d render, faceted geometry, flat shading, minimal palette" },
+    "papercut": { "label": "剪纸", "group": "design", "note": "层叠纸感、剪影", "prompt": "paper cut art, layered paper depth, soft shadows, bold silhouette" },
+    "poster": { "label": "极简海报", "group": "design", "note": "大留白、双色", "prompt": "minimalist poster design, generous negative space, two-color palette, strong composition" }
+  },
+  "detail": {
+    "draft": { "label": "草图", "quality": "low", "extra": "clean simple composition, minimal background, loose sketch feel" },
+    "normal": { "label": "标准", "quality": "medium", "extra": "well composed, balanced lighting, clean details" },
+    "detailed": { "label": "精细", "quality": "high", "extra": "highly detailed, intricate textures, sharp focus, cinematic lighting, masterpiece" }
+  },
+  "aspect": {
+    "square": "1024x1024",
+    "portrait": "1024x1536",
+    "landscape": "1536x1024",
+    "16:9": "1536x864",
+    "4:3": "1408x1056",
+    "9:16": "864x1536"
+  }
+}

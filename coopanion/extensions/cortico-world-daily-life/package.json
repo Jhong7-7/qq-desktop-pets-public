@@ -1,0 +1,18 @@
+{
+  "name": "cortico-world-daily-life",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "description": "让她有自己的日子：每天一份随机行程，按时段写一段经历，月末整理一次。零网络、零 API key。",
+  "main": "./src/index.js",
+  "exports": { ".": "./src/index.js" },
+  "engines": { "node": ">=22" },
+  "keywords": ["cortico", "world", "companion", "roleplay", "schedule", "daily-life"],
+  "files": ["src", "describe.json", "README.md"],
+  "cortico": {
+    "kind": "world",
+    "api": 6,
+    "displayName": "每日生活",
+    "describe": "describe.json"
+  }
+}

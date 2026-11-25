@@ -1,0 +1,1 @@
+CreateObject("WScript.Shell").Run "powershell -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File ""D:\dsh workplace\patches\starpost\guard.ps1""", 0, False

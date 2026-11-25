@@ -1,0 +1,46 @@
+{
+  "name": "cortico-world-qq",
+  "version": "0.2.7",
+  "type": "module",
+  "description": "Cortico World: QQ group and private chats through a OneBot v11 forward WebSocket, with a draft-and-confirm gate on replies",
+  "author": "Pal AI Lab",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pal-AI-Lab/Cortico.git",
+    "directory": "src/worlds/qq"
+  },
+  "homepage": "https://github.com/Pal-AI-Lab/Cortico/tree/main/src/worlds/qq#readme",
+  "bugs": {
+    "url": "https://github.com/Pal-AI-Lab/Cortico/issues"
+  },
+  "keywords": [
+    "cortico-world",
+    "cortico",
+    "qq",
+    "onebot"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "main": "./src/index.ts",
+  "cortico": {
+    "kind": "world",
+    "api": 6,
+    "displayName": "QQ",
+    "icon": "src/icon.svg",
+    "webUiClient": "dist/webui.js",
+    "webUiStyle": "dist/webui.css",
+    "describe": "describe.json"
+  },
+  "files": [
+    "src",
+    "dist",
+    "describe.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "ws": "8.21.1"
+  }
+}

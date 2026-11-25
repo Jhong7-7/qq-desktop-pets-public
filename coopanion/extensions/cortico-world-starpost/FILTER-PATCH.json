@@ -1,0 +1,9 @@
+{
+    "patched":  true,
+    "base":  "cortico-world-starpost@0.22.0",
+    "features":  [
+                     "group-filter",
+                     "isolation-channels"
+                 ],
+    "at":  "2026-11-02T15:28:12+08:00"
+}

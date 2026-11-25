@@ -1,0 +1,3647 @@
+{
+  "version": 1,
+  "kind": "water",
+  "updatedAtMs": 1794936475880,
+  "nextId": 18,
+  "oxygen": 100,
+  "cleanliness": 62.3307810069444,
+  "fish": [],
+  "plants": [
+    {
+      "id": "aquatic-1",
+      "species": "waterweed",
+      "x": 0,
+      "y": 0,
+      "health": 100,
+      "growthHours": 224.13065111110907,
+      "stage": 3
+    },
+    {
+      "id": "aquatic-2",
+      "species": "algae",
+      "x": 4,
+      "y": 0,
+      "health": 89.08333333333191,
+      "growthHours": 224.13065111110907,
+      "stage": 3
+    }
+  ],
+  "food": [],
+  "history": [
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794333600000,
+      "score": 59,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794337200000,
+      "score": 59,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794340800000,
+      "score": 59,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794344400000,
+      "score": 59,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794348000000,
+      "score": 59,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794351600000,
+      "score": 59,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794355200000,
+      "score": 59,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794358800000,
+      "score": 59,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794362400000,
+      "score": 60,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794366000000,
+      "score": 60,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794369600000,
+      "score": 60,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794373200000,
+      "score": 60,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794376800000,
+      "score": 60,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794380400000,
+      "score": 61,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794384000000,
+      "score": 61,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794387600000,
+      "score": 61,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794391200000,
+      "score": 61,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794394800000,
+      "score": 61,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794398400000,
+      "score": 61,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794402000000,
+      "score": 61,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794405600000,
+      "score": 61,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794409200000,
+      "score": 61,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794412800000,
+      "score": 61,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794416400000,
+      "score": 61,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794420000000,
+      "score": 61,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794423600000,
+      "score": 61,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794427200000,
+      "score": 61,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794430800000,
+      "score": 61,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794434400000,
+      "score": 61,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794438000000,
+      "score": 61,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794441600000,
+      "score": 62,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794445200000,
+      "score": 62,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794448800000,
+      "score": 62,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794452400000,
+      "score": 62,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794456000000,
+      "score": 62,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794459600000,
+      "score": 63,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794463200000,
+      "score": 63,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794466800000,
+      "score": 63,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794470400000,
+      "score": 63,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794474000000,
+      "score": 63,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794477600000,
+      "score": 64,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794481200000,
+      "score": 64,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794484800000,
+      "score": 64,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794488400000,
+      "score": 64,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794492000000,
+      "score": 64,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794495600000,
+      "score": 64,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794499200000,
+      "score": 64,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794502800000,
+      "score": 64,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794506400000,
+      "score": 64,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794510000000,
+      "score": 64,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794513600000,
+      "score": 64,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794517200000,
+      "score": 64,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794520800000,
+      "score": 64,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794524400000,
+      "score": 64,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794528000000,
+      "score": 64,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794531600000,
+      "score": 64,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794535200000,
+      "score": 64,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794538800000,
+      "score": 65,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794542400000,
+      "score": 65,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794546000000,
+      "score": 65,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794549600000,
+      "score": 65,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794553200000,
+      "score": 65,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794556800000,
+      "score": 66,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794560400000,
+      "score": 66,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794564000000,
+      "score": 66,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794567600000,
+      "score": 66,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794571200000,
+      "score": 66,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794574800000,
+      "score": 66,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794578400000,
+      "score": 66,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794582000000,
+      "score": 66,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794585600000,
+      "score": 66,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794589200000,
+      "score": 66,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794592800000,
+      "score": 66,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794596400000,
+      "score": 66,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794600000000,
+      "score": 66,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794603600000,
+      "score": 66,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794607200000,
+      "score": 66,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794610800000,
+      "score": 66,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794614400000,
+      "score": 66,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794618000000,
+      "score": 67,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794621600000,
+      "score": 67,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794625200000,
+      "score": 67,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794628800000,
+      "score": 67,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794632400000,
+      "score": 67,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794636000000,
+      "score": 68,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794639600000,
+      "score": 68,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794643200000,
+      "score": 68,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794646800000,
+      "score": 68,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794650400000,
+      "score": 68,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794654000000,
+      "score": 68,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794657600000,
+      "score": 68,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794661200000,
+      "score": 68,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794664800000,
+      "score": 68,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794668400000,
+      "score": 68,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794672000000,
+      "score": 68,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794675600000,
+      "score": 68,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794679200000,
+      "score": 68,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794682800000,
+      "score": 68,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794686400000,
+      "score": 68,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794690000000,
+      "score": 68,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794693600000,
+      "score": 68,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794697200000,
+      "score": 69,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794700800000,
+      "score": 69,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794704400000,
+      "score": 69,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794708000000,
+      "score": 69,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794711600000,
+      "score": 69,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794715200000,
+      "score": 70,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794718800000,
+      "score": 70,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794722400000,
+      "score": 70,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794726000000,
+      "score": 70,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794729600000,
+      "score": 70,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794733200000,
+      "score": 71,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794736800000,
+      "score": 71,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794740400000,
+      "score": 71,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794744000000,
+      "score": 71,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794747600000,
+      "score": 71,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794751200000,
+      "score": 71,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794754800000,
+      "score": 71,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794758400000,
+      "score": 71,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794762000000,
+      "score": 71,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794765600000,
+      "score": 71,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794769200000,
+      "score": 71,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794772800000,
+      "score": 71,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794776400000,
+      "score": 71,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794780000000,
+      "score": 71,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794783600000,
+      "score": 71,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794787200000,
+      "score": 71,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794790800000,
+      "score": 71,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794794400000,
+      "score": 72,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794798000000,
+      "score": 72,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794801600000,
+      "score": 72,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794805200000,
+      "score": 72,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794808800000,
+      "score": 72,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794812400000,
+      "score": 73,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794816000000,
+      "score": 73,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794819600000,
+      "score": 73,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794823200000,
+      "score": 73,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794826800000,
+      "score": 73,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794830400000,
+      "score": 73,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794834000000,
+      "score": 73,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794837600000,
+      "score": 73,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794841200000,
+      "score": 73,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794844800000,
+      "score": 73,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794848400000,
+      "score": 73,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794852000000,
+      "score": 73,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794855600000,
+      "score": 73,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794859200000,
+      "score": 73,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794862800000,
+      "score": 73,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794866400000,
+      "score": 73,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794870000000,
+      "score": 73,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794873600000,
+      "score": 74,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794877200000,
+      "score": 74,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794880800000,
+      "score": 74,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794884400000,
+      "score": 74,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794888000000,
+      "score": 74,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794891600000,
+      "score": 75,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794895200000,
+      "score": 75,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794898800000,
+      "score": 75,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794902400000,
+      "score": 75,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794906000000,
+      "score": 75,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794909600000,
+      "score": 76,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794913200000,
+      "score": 76,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794916800000,
+      "score": 76,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794920400000,
+      "score": 76,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794924000000,
+      "score": 76,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794927600000,
+      "score": 76,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794931200000,
+      "score": 76,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    },
+    {
+      "progression": {
+        "level": 2,
+        "peakScore": 183,
+        "guideStep": 2,
+        "guideSkipped": false,
+        "actions": [
+          "observe",
+          "care",
+          "inhabit",
+          "upgrade"
+        ],
+        "scoreVersion": 3
+      },
+      "recordedAtMs": 1794934800000,
+      "score": 76,
+      "scoreVersion": 3,
+      "oxygen": 100,
+      "cleanliness": 62.3307810069444,
+      "fish": []
+    }
+  ],
+  "replays": [],
+  "name": "泡泡的水箱",
+  "progression": {
+    "level": 2,
+    "peakScore": 183,
+    "guideStep": 2,
+    "guideSkipped": false,
+    "actions": [
+      "observe",
+      "care",
+      "inhabit",
+      "upgrade"
+    ],
+    "scoreVersion": 3
+  },
+  "careAlerts": {},
+  "deaths": [
+    {
+      "recordedAtMs": 1793885623066,
+      "organism": {
+        "id": "fish-4",
+        "species": "medaka",
+        "x": 3,
+        "y": 1,
+        "health": 100,
+        "energy": 0,
+        "ageHours": 130.65957222222244,
+        "lastMeal": {
+          "atMs": 1793801400000,
+          "kind": "food",
+          "id": "food-13"
+        }
+      },
+      "cause": "能量耗尽",
+      "environment": {
+        "phase": "night",
+        "oxygen": 98.57521488888895,
+        "cleanliness": 68.34742447916662
+      }
+    },
+    {
+      "recordedAtMs": 1794029605644,
+      "organism": {
+        "id": "fish-3",
+        "species": "guppy",
+        "x": 5,
+        "y": 1,
+        "health": 100,
+        "energy": 0,
+        "ageHours": 170.65533861111098,
+        "lastMeal": {
+          "atMs": 1793965800000,
+          "kind": "food",
+          "id": "food-17"
+        }
+      },
+      "cause": "能量耗尽",
+      "environment": {
+        "phase": "day",
+        "oxygen": 100,
+        "cleanliness": 62.3271767569444
+      }
+    },
+    {
+      "recordedAtMs": 1794094122744,
+      "organism": {
+        "id": "fish-5",
+        "species": "shrimp",
+        "x": 4,
+        "y": 1,
+        "health": 100,
+        "energy": 0,
+        "ageHours": 188.57539194444445,
+        "lastMeal": {
+          "atMs": 1794038400000,
+          "kind": "algae",
+          "id": "aquatic-2"
+        }
+      },
+      "cause": "能量耗尽",
+      "environment": {
+        "phase": "day",
+        "oxygen": 100,
+        "cleanliness": 62.3307810069444
+      }
+    }
+  ]
+}

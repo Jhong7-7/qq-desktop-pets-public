@@ -1,0 +1,12 @@
+{
+  "tools": [],
+  "events": [
+    {
+      "type": "greetings.due",
+      "description": {
+        "zh": "到了配置的固定时刻（默认早安 08:30、晚安 23:30）：提醒她可以主动给主人发一条消息。",
+        "en": "A configured fixed time was reached (morning 08:30 / night 23:30 by default): a cue that she may message her owner."
+      }
+    }
+  ]
+}

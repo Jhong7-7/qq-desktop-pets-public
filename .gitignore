@@ -1,0 +1,22 @@
+# 备份文件与日志
+*.bak*
+*.log
+logs/
+tmp/
+__pycache__/
+
+# 依赖
+node_modules/
+
+# 运行时大文件（模型/媒体）不进仓库
+*.pth
+*.ckpt
+*.onnx
+
+# 凭据与登录态绝不进仓库
+.secret/
+*.env
+.env.*
+**/cookies.json
+**/report-credentials.json
+**/starpost-credential.json

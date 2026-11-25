@@ -1,0 +1,17 @@
+{
+  "name": "cortico-world-songs",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "description": "曲库：把本地翻唱音频交给 QQ 语音条发送（不调用推理，只读文件给句柄）。",
+  "main": "./src/index.js",
+  "exports": { ".": "./src/index.js" },
+  "engines": { "node": ">=22" },
+  "files": ["src", "describe.json"],
+  "cortico": {
+    "kind": "world",
+    "api": 6,
+    "displayName": "曲库",
+    "describe": "describe.json"
+  }
+}

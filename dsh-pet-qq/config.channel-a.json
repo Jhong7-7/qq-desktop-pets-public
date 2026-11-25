@@ -1,0 +1,44 @@
+{
+  "_comment": [
+    "通道 A：与 Coo 共用 SnowLuma 的 3001 / 同一个 token（泡泡🫧 30027）。",
+    "保留它是为了随时切回：node bridge.mjs --config config.channel-a.json",
+    "注意：两条桥不能同时跑（单实例闸门在 7341），同一时刻只允许一条通道。"
+  ],
+  "channel": "channel-a（与 Coo 共用 3001 / 泡泡🫧）",
+  "onebot": {
+    "wsUrl": "ws://127.0.0.1:3001/",
+    "token": "YOUR_CREDENTIAL_HERE",
+    "wsModuleAnchor": "D:/coopanion/data/extensions/local/cortico-world-qq/package.json",
+    "expectSelfId": 30027
+  },
+  "pet": {
+    "baseUrl": "http://127.0.0.1:1882",
+    "route": "/dsh-pet-7340",
+    "petId": "main",
+    "surface": "any",
+    "timeoutMs": 120000
+  },
+  "listen": {
+    "privates": [10000, 30001],
+    "groups": [369189729],
+    "groupWake": "mention",
+    "allowAllPrivates": false
+  },
+  "prompt": {
+    "private": "{nick} 在 QQ 上私聊你说：{text}",
+    "group": "QQ 群「{group}」里 {nick} 对你说：{text}"
+  },
+  "reply": {
+    "maxChars": 300,
+    "maxChunks": 3,
+    "sendIntervalMs": 700,
+    "dryRun": false
+  },
+  "instance": {
+    "port": 7341
+  },
+  "log": {
+    "file": "logs/bridge.log",
+    "maxBytes": 5000000
+  }
+}

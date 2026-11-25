@@ -1,0 +1,101 @@
+{
+  "name": "@wocwang/cortico-world-gpt-sovits-for-coopanion",
+  "version": "0.6.9",
+  "type": "module",
+  "description": "GPT-SoVITS 语音插件：支持 AMD 显卡（ROCm，实验性）和 NVIDIA 显卡，没有独显自动走 CPU；全程本机合成、不上传录音，一键装运行时与权重。",
+  "author": "wocwang",
+  "contributors": [
+    "Phantivia",
+    {
+      "name": "ink1453",
+      "url": "https://github.com/ink1453"
+    },
+    {
+      "name": "ANGOSUNG",
+      "url": "https://github.com/ANGOSUNG"
+    },
+    {
+      "name": "aiAsuka",
+      "url": "https://github.com/aiAsuka"
+    }
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wocwang/cortico-world-gpt-sovits-for-coopanion.git"
+  },
+  "homepage": "https://github.com/wocwang/cortico-world-gpt-sovits-for-coopanion#readme",
+  "bugs": {
+    "url": "https://github.com/wocwang/cortico-world-gpt-sovits-for-coopanion/issues"
+  },
+  "keywords": [
+    "cortico-world",
+    "cortico",
+    "coopanion",
+    "tts",
+    "gpt-sovits"
+  ],
+  "os": [
+    "win32",
+    "darwin"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@11.5.0",
+  "main": "./src/index.ts",
+  "cortico": {
+    "kind": "world",
+    "api": 6,
+    "displayName": "更好的GPTSovits 语音—大肥鱼来咯",
+    "locales": {
+      "zh": {
+        "displayName": "更好的GPTSovits 语音—大肥鱼来咯",
+        "description": "支持 AMD 显卡（ROCm，实验性）和 NVIDIA 显卡，没有独显自动走 CPU。全程本机合成、不上传录音，一键装好运行时与模型；内置大肥鱼 / 星落落音色，支持自备权重与自定义音色，也能把声音交给 QQ 插件。"
+      },
+      "en": {
+        "displayName": "Better GPTSovits Voice — Fatfish",
+        "description": "Works with AMD GPUs (ROCm, experimental) and NVIDIA GPUs, and falls back to CPU without a discrete GPU. Everything is synthesized locally, nothing is uploaded; runtime and models install in one click. Ships the Fatfish / Xll voices, supports your own weights and custom voices, and can hand the audio to QQ plugins."
+      }
+    },
+    "tags": [
+      "voice",
+      "local",
+      "experimental"
+    ],
+    "webUiClient": "dist/webui.js",
+    "webUiStyle": "dist/webui.css",
+    "describe": "describe.json"
+  },
+  "files": [
+    "src",
+    "dist",
+    "assets",
+    "vendor",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "CHANGELOG.md",
+    "describe.json",
+    "CONTRIBUTORS.md"
+  ],
+  "scripts": {
+    "build": "node scripts/build-webui.mjs",
+    "check:refs": "node --import tsx scripts/check-live-refs.mjs",
+    "check:audio": "node scripts/check-audio-backend.mjs",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build && npm test && npm run typecheck && npm run check:audio"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "cortico": "^0.2.3",
+    "esbuild": "^0.28.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}

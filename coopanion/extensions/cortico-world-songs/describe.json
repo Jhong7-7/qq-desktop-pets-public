@@ -1,0 +1,34 @@
+{
+  "tools": [
+    {
+      "name": "song_list",
+      "description": "List the songs (audio files) currently in the local song library.",
+      "parameters": { "type": "object", "properties": {} },
+      "tags": ["read"],
+      "summary": {
+        "zh": "列出曲库里现有的翻唱音频文件。",
+        "en": "List the audio files in the local song library."
+      }
+    },
+    {
+      "name": "song_send",
+      "description": "Take one song from the local library and return it as a [blob] attachment handle. After that, call qq_draft with that handle in its voice field to send a QQ voice bar.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "File name or a distinctive part of it, e.g. \"see-you-again\" or \"大鱼\"."
+          }
+        },
+        "required": ["name"]
+      },
+      "tags": ["act"],
+      "summary": {
+        "zh": "从曲库取出一首歌的音频，回执带句柄；再用 qq_draft 的 voice 发送。",
+        "en": "Return one library song as an audio blob handle, ready for qq_draft voice."
+      }
+    }
+  ],
+  "events": []
+}

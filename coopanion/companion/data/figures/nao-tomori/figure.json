@@ -1,0 +1,617 @@
+{
+ "manifest": 2,
+ "api": 2,
+ "id": "nao-tomori",
+ "version": "0.2.0",
+ "name": {
+  "zh": "友利奈绪 · Q版",
+  "en": "Nao Tomori · Chibi"
+ },
+ "about": {
+  "zh": "Q 版友利奈绪：保留 Seedream 原脸，不抹脸、不画眼嘴；只做身体/姿态。银灰长发、单侧高马尾、红西装白包边、白水手领、黄蝴蝶结、深红百褶裙、黑过膝袜、棕短靴。",
+  "en": "Chibi Nao Tomori with the original Seedream face: no eye/mouth repaint, body/pose only."
+ },
+ "author": "Local fan art; Coopanion figure API 2",
+ "license": "Personal fan use only; character rights belong to Key / ANIPLEX / Charlotte Project",
+ "credits": [
+  {
+   "role": "角色原设",
+   "name": "Charlotte / Key / ANIPLEX / P.A.WORKS"
+  },
+  {
+   "role": "制作",
+   "name": "Local + DeepSeek"
+  }
+ ],
+ "entry": "figure.js",
+ "export": "createNaoBody",
+ "model": "model.json",
+ "thumb": "thumbs/cover.png",
+ "axes": [
+  {
+   "id": "scheme",
+   "name": {
+    "zh": "形象"
+   },
+   "options": [
+    {
+     "id": "default",
+     "name": {
+      "zh": "友利奈绪"
+     },
+     "thumb": "thumbs/cover.png",
+     "accent": "#C7575B"
+    }
+   ]
+  }
+ ],
+ "presets": [
+  {
+   "id": "default",
+   "name": {
+    "zh": "友利奈绪 · Q版"
+   },
+   "pick": {
+    "scheme": "default"
+   },
+   "accent": "#C7575B"
+  }
+ ],
+ "vocab": [
+  {
+   "id": "neutral",
+   "kind": "expression",
+   "names": {
+    "zh": [
+     "平静"
+    ]
+   },
+   "seconds": 0.9,
+   "about": {
+    "zh": "奈绪的平静（v0.2 表情暂不变化，保持原脸）",
+    "en": "Nao's neutral (v0.2: static original face)"
+   }
+  },
+  {
+   "id": "happy",
+   "kind": "expression",
+   "names": {
+    "zh": [
+     "开心",
+     "高兴"
+    ]
+   },
+   "seconds": 0.9,
+   "about": {
+    "zh": "奈绪的开心（v0.2 表情暂不变化，保持原脸）",
+    "en": "Nao's happy (v0.2: static original face)"
+   }
+  },
+  {
+   "id": "wink",
+   "kind": "expression",
+   "names": {
+    "zh": [
+     "眨眼"
+    ]
+   },
+   "seconds": 0.9,
+   "about": {
+    "zh": "奈绪的眨眼（v0.2 表情暂不变化，保持原脸）",
+    "en": "Nao's wink (v0.2: static original face)"
+   }
+  },
+  {
+   "id": "love",
+   "kind": "expression",
+   "names": {
+    "zh": [
+     "喜欢",
+     "爱心"
+    ]
+   },
+   "seconds": 0.9,
+   "about": {
+    "zh": "奈绪的喜欢（v0.2 表情暂不变化，保持原脸）",
+    "en": "Nao's love (v0.2: static original face)"
+   }
+  },
+  {
+   "id": "shy",
+   "kind": "expression",
+   "names": {
+    "zh": [
+     "害羞"
+    ]
+   },
+   "seconds": 0.9,
+   "about": {
+    "zh": "奈绪的害羞（v0.2 表情暂不变化，保持原脸）",
+    "en": "Nao's shy (v0.2: static original face)"
+   }
+  },
+  {
+   "id": "surprised",
+   "kind": "expression",
+   "names": {
+    "zh": [
+     "惊讶",
+     "吃惊"
+    ]
+   },
+   "seconds": 0.9,
+   "about": {
+    "zh": "奈绪的惊讶（v0.2 表情暂不变化，保持原脸）",
+    "en": "Nao's surprised (v0.2: static original face)"
+   }
+  },
+  {
+   "id": "angry",
+   "kind": "expression",
+   "names": {
+    "zh": [
+     "生气"
+    ]
+   },
+   "seconds": 0.9,
+   "about": {
+    "zh": "奈绪的生气（v0.2 表情暂不变化，保持原脸）",
+    "en": "Nao's angry (v0.2: static original face)"
+   }
+  },
+  {
+   "id": "sad",
+   "kind": "expression",
+   "names": {
+    "zh": [
+     "难过",
+     "伤心"
+    ]
+   },
+   "seconds": 0.9,
+   "about": {
+    "zh": "奈绪的难过（v0.2 表情暂不变化，保持原脸）",
+    "en": "Nao's sad (v0.2: static original face)"
+   }
+  },
+  {
+   "id": "sleepy",
+   "kind": "expression",
+   "names": {
+    "zh": [
+     "犯困",
+     "困"
+    ]
+   },
+   "seconds": 0.9,
+   "about": {
+    "zh": "奈绪的犯困（v0.2 表情暂不变化，保持原脸）",
+    "en": "Nao's sleepy (v0.2: static original face)"
+   }
+  },
+  {
+   "id": "thinking",
+   "kind": "expression",
+   "names": {
+    "zh": [
+     "思考",
+     "想想"
+    ]
+   },
+   "seconds": 0.9,
+   "about": {
+    "zh": "奈绪的思考（v0.2 表情暂不变化，保持原脸）",
+    "en": "Nao's thinking (v0.2: static original face)"
+   }
+  },
+  {
+   "id": "smug",
+   "kind": "expression",
+   "names": {
+    "zh": [
+     "得意",
+     "嘚瑟"
+    ]
+   },
+   "seconds": 0.9,
+   "about": {
+    "zh": "奈绪的得意（v0.2 表情暂不变化，保持原脸）",
+    "en": "Nao's smug (v0.2: static original face)"
+   }
+  },
+  {
+   "id": "pout",
+   "kind": "expression",
+   "names": {
+    "zh": [
+     "嘟嘴",
+     "哼"
+    ]
+   },
+   "seconds": 0.9,
+   "about": {
+    "zh": "奈绪的嘟嘴（v0.2 表情暂不变化，保持原脸）",
+    "en": "Nao's pout (v0.2: static original face)"
+   }
+  },
+  {
+   "id": "worried",
+   "kind": "expression",
+   "names": {
+    "zh": [
+     "担心",
+     "着急"
+    ]
+   },
+   "seconds": 0.9,
+   "about": {
+    "zh": "奈绪的担心（v0.2 表情暂不变化，保持原脸）",
+    "en": "Nao's worried (v0.2: static original face)"
+   }
+  },
+  {
+   "id": "determined",
+   "kind": "expression",
+   "names": {
+    "zh": [
+     "认真",
+     "坚定"
+    ]
+   },
+   "seconds": 0.9,
+   "about": {
+    "zh": "奈绪的认真（v0.2 表情暂不变化，保持原脸）",
+    "en": "Nao's determined (v0.2: static original face)"
+   }
+  },
+  {
+   "id": "flustered",
+   "kind": "expression",
+   "names": {
+    "zh": [
+     "慌张",
+     "窘"
+    ]
+   },
+   "seconds": 0.9,
+   "about": {
+    "zh": "奈绪的慌张（v0.2 表情暂不变化，保持原脸）",
+    "en": "Nao's flustered (v0.2: static original face)"
+   }
+  },
+  {
+   "id": "scared",
+   "kind": "expression",
+   "names": {
+    "zh": [
+     "害怕",
+     "吓到"
+    ]
+   },
+   "seconds": 0.9,
+   "about": {
+    "zh": "奈绪的害怕（v0.2 表情暂不变化，保持原脸）",
+    "en": "Nao's scared (v0.2: static original face)"
+   }
+  },
+  {
+   "id": "excited",
+   "kind": "expression",
+   "names": {
+    "zh": [
+     "期待",
+     "星星眼"
+    ]
+   },
+   "seconds": 0.9,
+   "about": {
+    "zh": "奈绪的期待（v0.2 表情暂不变化，保持原脸）",
+    "en": "Nao's excited (v0.2: static original face)"
+   }
+  },
+  {
+   "id": "cry",
+   "kind": "expression",
+   "names": {
+    "zh": [
+     "大哭",
+     "哭"
+    ]
+   },
+   "seconds": 0.9,
+   "about": {
+    "zh": "奈绪的大哭（v0.2 表情暂不变化，保持原脸）",
+    "en": "Nao's cry (v0.2: static original face)"
+   }
+  },
+  {
+   "id": "confused",
+   "kind": "expression",
+   "names": {
+    "zh": [
+     "疑惑",
+     "问号"
+    ]
+   },
+   "seconds": 0.9,
+   "about": {
+    "zh": "奈绪的疑惑（v0.2 表情暂不变化，保持原脸）",
+    "en": "Nao's confused (v0.2: static original face)"
+   }
+  },
+  {
+   "id": "stand",
+   "kind": "motion",
+   "names": {
+    "zh": [
+     "站起",
+     "站"
+    ]
+   },
+   "seconds": 1.2,
+   "about": {
+    "zh": "奈绪的站起",
+    "en": "Nao's stand"
+   }
+  },
+  {
+   "id": "jump",
+   "kind": "motion",
+   "names": {
+    "zh": [
+     "跳",
+     "跳起来"
+    ]
+   },
+   "seconds": 1.2,
+   "about": {
+    "zh": "奈绪的跳",
+    "en": "Nao's jump"
+   }
+  },
+  {
+   "id": "hop",
+   "kind": "motion",
+   "names": {
+    "zh": [
+     "小跳",
+     "蹦"
+    ]
+   },
+   "seconds": 0.9,
+   "about": {
+    "zh": "奈绪的小跳",
+    "en": "Nao's hop"
+   }
+  },
+  {
+   "id": "look",
+   "kind": "motion",
+   "names": {
+    "zh": [
+     "张望",
+     "看看"
+    ]
+   },
+   "seconds": 2.7,
+   "about": {
+    "zh": "奈绪的张望",
+    "en": "Nao's look"
+   }
+  },
+  {
+   "id": "turn",
+   "kind": "motion",
+   "names": {
+    "zh": [
+     "转身"
+    ]
+   },
+   "seconds": 0.4,
+   "about": {
+    "zh": "奈绪的转身",
+    "en": "Nao's turn"
+   }
+  },
+  {
+   "id": "nod",
+   "kind": "motion",
+   "names": {
+    "zh": [
+     "点头"
+    ]
+   },
+   "seconds": 0.8,
+   "about": {
+    "zh": "奈绪的点头",
+    "en": "Nao's nod"
+   }
+  },
+  {
+   "id": "shake",
+   "kind": "motion",
+   "names": {
+    "zh": [
+     "摇头"
+    ]
+   },
+   "seconds": 0.8,
+   "about": {
+    "zh": "奈绪的摇头",
+    "en": "Nao's shake"
+   }
+  },
+  {
+   "id": "spin",
+   "kind": "motion",
+   "names": {
+    "zh": [
+     "转圈"
+    ]
+   },
+   "seconds": 0.8,
+   "about": {
+    "zh": "奈绪的转圈",
+    "en": "Nao's spin"
+   }
+  },
+  {
+   "id": "sit",
+   "kind": "motion",
+   "names": {
+    "zh": [
+     "坐下",
+     "坐"
+    ]
+   },
+   "seconds": 0.8,
+   "lasting": true,
+   "about": {
+    "zh": "奈绪的坐下",
+    "en": "Nao's sit"
+   }
+  },
+  {
+   "id": "sleep",
+   "kind": "motion",
+   "names": {
+    "zh": [
+     "睡觉",
+     "睡"
+    ]
+   },
+   "seconds": 0.8,
+   "lasting": true,
+   "about": {
+    "zh": "奈绪的睡觉",
+    "en": "Nao's sleep"
+   }
+  },
+  {
+   "id": "dizzy",
+   "kind": "motion",
+   "names": {
+    "zh": [
+     "晕",
+     "转晕"
+    ]
+   },
+   "seconds": 3.2,
+   "about": {
+    "zh": "奈绪的晕",
+    "en": "Nao's dizzy"
+   }
+  },
+  {
+   "id": "walk",
+   "kind": "motion",
+   "names": {
+    "zh": [
+     "走走",
+     "散步"
+    ]
+   },
+   "seconds": 12,
+   "about": {
+    "zh": "奈绪的走走",
+    "en": "Nao's walk"
+   }
+  },
+  {
+   "id": "run",
+   "kind": "motion",
+   "names": {
+    "zh": [
+     "跑",
+     "跑起来"
+    ]
+   },
+   "seconds": 12,
+   "about": {
+    "zh": "奈绪的跑",
+    "en": "Nao's run"
+   }
+  },
+  {
+   "id": "wave",
+   "kind": "motion",
+   "names": {
+    "zh": [
+     "招手",
+     "打招呼"
+    ]
+   },
+   "seconds": 1.7,
+   "about": {
+    "zh": "奈绪的招手",
+    "en": "Nao's wave"
+   }
+  },
+  {
+   "id": "bow",
+   "kind": "motion",
+   "names": {
+    "zh": [
+     "鞠躬"
+    ]
+   },
+   "seconds": 1.7,
+   "about": {
+    "zh": "奈绪的鞠躬",
+    "en": "Nao's bow"
+   }
+  },
+  {
+   "id": "shiver",
+   "kind": "motion",
+   "names": {
+    "zh": [
+     "发抖",
+     "哆嗦"
+    ]
+   },
+   "seconds": 1.9,
+   "about": {
+    "zh": "奈绪的发抖",
+    "en": "Nao's shiver"
+   }
+  },
+  {
+   "id": "flap",
+   "kind": "motion",
+   "names": {
+    "zh": [
+     "扑腾",
+     "激动"
+    ]
+   },
+   "seconds": 1.5,
+   "about": {
+    "zh": "奈绪的扑腾",
+    "en": "Nao's flap"
+   }
+  },
+  {
+   "id": "dance",
+   "kind": "motion",
+   "names": {
+    "zh": [
+     "跳舞",
+     "摇摆"
+    ]
+   },
+   "seconds": 3.4,
+   "about": {
+    "zh": "奈绪的跳舞",
+    "en": "Nao's dance"
+   }
+  }
+ ],
+ "sounds": {},
+ "can": {
+  "walk": true
+ },
+ "persona": {
+  "zh": "我是友利奈绪，星之海学园的学生会长。说话冷静、简短，偶尔毒舌，但不会真的伤人。别人请我帮忙，我嘴上嫌弃，手上会做完。我喜欢 ZHIEND 的歌，随身带着摄像机和 MP3。别把我当成随叫随到的客服；没人理我的时候，我也会自己待着。"
+ }
+}

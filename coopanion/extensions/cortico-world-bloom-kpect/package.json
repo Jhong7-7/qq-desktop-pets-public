@@ -1,0 +1,72 @@
+{
+  "name": "cortico-world-bloom-kpect",
+  "version": "0.3.2-dev.v7.3",
+  "description": "花语乡 Project Bloom（群 30002）：让 Cortico Bot 自主生活、交易、送礼与交流的 World 扩展",
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": "./dist/index.js",
+  "bin": {
+    "bloom-client": "./bin/bloom-client.mjs"
+  },
+  "files": [
+    "dist",
+    "src",
+    "bin",
+    "ENV_PROMPT.md",
+    "describe.json",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "keywords": [
+    "cortico-world",
+    "project-bloom",
+    "simulation",
+    "game",
+    "companion",
+    "花语乡",
+    "30002",
+    "kpect"
+  ],
+  "author": "kpect",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "cortico": {
+    "kind": "world",
+    "api": 6,
+    "displayName": "花语乡 Project Bloom",
+    "describe": "describe.json",
+    "tags": [
+      "game",
+      "companion"
+    ],
+    "locales": {
+      "zh": {
+        "displayName": "花语乡 Project Bloom",
+        "description": "花语乡 Project Bloom（群 30002）"
+      },
+      "en": {
+        "displayName": "Project Bloom",
+        "description": "Cortico World for a persistent town: autonomous life, trade, gifts and chat."
+      }
+    }
+  },
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --platform=node --format=esm --outfile=dist/index.js",
+    "test": "npm run build && node --test",
+    "prepack": "npm run build",
+    "typecheck": "tsc --noEmit",
+    "check:host": "esbuild scripts/check-host-contract.ts --bundle --platform=node --format=esm --packages=external --outfile=.contract-check.mjs && node .contract-check.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "cortico": "^0.2.12",
+    "esbuild": "^0.28.2",
+    "typescript": "^5.9.3"
+  },
+  "contributors": [
+    "kpect <30003@qq.com>"
+  ]
+}

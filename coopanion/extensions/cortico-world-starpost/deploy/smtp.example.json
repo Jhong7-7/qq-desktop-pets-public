@@ -1,0 +1,7 @@
+{
+  "host": "smtp.example.com",
+  "port": 465,
+  "user": "sender@example.com",
+  "password": "YOUR_CREDENTIAL_HERE",
+  "from": "sender@example.com"
+}

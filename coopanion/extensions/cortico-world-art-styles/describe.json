@@ -1,0 +1,42 @@
+{
+  "tools": [
+    {
+      "name": "style_list",
+      "description": "List the drawing styles this skill pack knows: grouped keys, Chinese labels and when to use each.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "group": {
+            "type": "string",
+            "description": "Optional filter: anime / real / paint / design."
+          }
+        }
+      },
+      "tags": ["read"],
+      "summary": {
+        "zh": "列出画风包里的风格（分组、中文名、适用场景）以及精细度和比例选项。",
+        "en": "List grouped drawing styles plus the detail and aspect options."
+      }
+    },
+    {
+      "name": "style_prompt",
+      "description": "Turn a named style + subject into a ready-to-use image prompt with size and quality.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "style": { "type": "string", "description": "Style key from style_list, e.g. anime or watercolor." },
+          "subject": { "type": "string", "description": "What to draw: subject, pose, scene, mood." },
+          "detail": { "type": "string", "description": "draft / normal / detailed." },
+          "aspect": { "type": "string", "description": "square / portrait / landscape / 16:9 / 4:3 / 9:16." }
+        },
+        "required": ["style", "subject"]
+      },
+      "tags": ["read"],
+      "summary": {
+        "zh": "把「风格 + 主体 + 精细度 + 比例」拼成可直接给 image_draw 的 prompt / size / quality。",
+        "en": "Compose a ready-to-use prompt, size and quality for image_draw from a style and subject."
+      }
+    }
+  ],
+  "events": []
+}

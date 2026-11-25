@@ -1,0 +1,418 @@
+{
+  "_comment": [
+    "通道 B：dsh 桌宠专用 QQ。独立协议端端口（3011 WS / 3010 HTTP）、独立 token、独立 QQ 号，和 Coo 的 3001 完全隔离。",
+    "下面三处是占位，跑 tools\\new-channel.ps1 -Uin <桌宠的QQ号> 会自动填好：",
+    "  onebot.wsUrl / onebot.token / onebot.expectSelfId",
+    "填好之后：QQ B 登录 → 协议端在 3011 监听 → start-hidden.vbs 起桥。"
+  ],
+  "channel": "channel-b（桌宠专用 QQ 10001，3011）",
+  "onebot": {
+    "wsUrl": "ws://127.0.0.1:3011/",
+    "token": "YOUR_CREDENTIAL_HERE",
+    "wsModuleAnchor": "D:/coopanion/data/extensions/local/cortico-world-qq/package.json",
+    "expectSelfId": 10001
+  },
+  "pet": {
+    "baseUrl": "http://127.0.0.1:8726",
+    "baseUrls": [
+      "http://127.0.0.1:8726",
+      "http://127.0.0.1:1882"
+    ],
+    "autoDiscover": true,
+    "route": "/dsh-pet-7340",
+    "petId": "main",
+    "surface": "any",
+    "timeoutMs": 120000
+  },
+  "listen": {
+    "privates": [
+      10000
+    ],
+    "groups": [
+      20000
+    ],
+    "groupWake": "all",
+    "allowAllPrivates": false
+  },
+  "groupChat": {
+    "botAccountIds": [
+      30027,
+      10001
+    ],
+    "maxBotTurns": 8,
+    "maxSendsPerWindow": 12,
+    "windowSec": 60,
+    "respectAt": true,
+    "replayMissed": true,
+    "replayMissedMax": 6,
+    "replayMissedSec": 600,
+    "nameOf": {
+      "10000": "哥哥",
+      "10001": "溪颜(你)",
+      "30027": "泡泡"
+    }
+  },
+  "prompt": {
+    "private": "【私聊｜只有你和哥哥两个人｜这句会发回私聊】\n哥哥：{text}",
+    "group": "【三人群 {gid}｜看下面的 QQ 号认说话人｜这句会发回这个群】\nQQ 群 {gid}「{group}」里 {nick}（QQ {uid}）{at}说：{text}{scope}"
+  },
+  "reply": {
+    "_comment": "2026-11-20 真人感三项：① casual=低信息量私聊敷衍/已读不回（enabled=false 可关）；② typingTiers=按回复长度分档的打字延迟（短快长慢+偶发长尾），旧的 typingDelayMs/JitterMs 仅作兜底；③ proactive.spreadMs=主动间隔随机化。多条之间每条至少隔 sendIntervalMs+抖动。群聊用 reply.group 节制值，不受这三项影响。要恢复：casual.enabled=false、typingTiers 清空、spreadMs=0，重启桥。",
+    "maxChars": 100000,
+    "maxChunks": 1000,
+    "casual": {
+      "enabled": false,
+      "_comment": "只对私聊生效：极短、无信息量的消息（嗯/哦/好/哈哈/表情）不认真回。2026-11-23 关：短消息（嘿嘿/哈哈等）被敷衍成一字，绕过了人设，改由溪颜本人正常回。replyChance=敷衍概率，其余为已读不回；skipStreakMax=连续不回上限，达到后强制正常回一次；带问号/图片/@ 的消息一律不拦。敷衍与不回都不写进桌宠记忆。",
+      "words": [
+        "嗯",
+        "哦",
+        "好",
+        "行",
+        "哈",
+        "哈哈",
+        "666",
+        " ok",
+        "ok",
+        "嗯嗯",
+        "哦哦",
+        "好嘞",
+        "收到",
+        "随便",
+        "知道了"
+      ],
+      "maxLen": 2,
+      "replyChance": 0.55,
+      "skipStreakMax": 2,
+      "briefs": [
+        "嗯。",
+        "哦。",
+        "……",
+        "哈。",
+        "好。",
+        "[白眼]"
+      ]
+    },
+    "typingDelayMs": 2500,
+    "typingJitterMs": 1500,
+    "typingTiers": {
+      "_comment": "按回复文本长度分档：≤short.maxChars 用 short，≥long.minChars 用 long，其余 normal；含问号叠加 question 的额外时长，含 [voice] 叠加 voice。tail 是偶发长尾概率。数值单位 ms。",
+      "short": {
+        "maxChars": 6,
+        "baseMs": 700,
+        "jitterMs": 400
+      },
+      "normal": {
+        "baseMs": 2200,
+        "jitterMs": 1000
+      },
+      "long": {
+        "minChars": 40,
+        "baseMs": 4000,
+        "jitterMs": 1500
+      },
+      "question": {
+        "extraMs": 800
+      },
+      "voice": {
+        "extraMs": 1500
+      },
+      "tail": {
+        "chance": 0.12,
+        "extraMs": 2500
+      }
+    },
+    "sendIntervalMs": 1200,
+    "group": {
+      "_comment": "群聊发言限制：单条 300 字、一轮最多 8 条、每条至少隔 1.5s。群聊防刷屏闸门另见 groupChat 段（连续 8 轮 / 60s 内 12 条）。",
+      "maxChars": 300,
+      "maxChunks": 8,
+      "sendIntervalMs": 1500,
+      "sendJitterMs": 500
+    },
+    "dryRun": false,
+    "stickers": {
+      "enabled": true,
+      "faceIds": {},
+      "maxImages": 1,
+      "minTurnsBetween": 0,
+      "minIntervalMs": 0,
+      "maxImageBytes": 2097152,
+      "stripUnknown": true,
+      "imageAsSeparateMessage": false
+    },
+    "sendJitterMs": 500,
+    "batch": {
+      "enabled": false,
+      "quietMs": 3500,
+      "maxWaitMs": 12000,
+      "maxMessages": 6,
+      "groupEnabled": false
+    }
+  },
+  "poke": {
+    "_comment": "方案④戳一戳互动：哥哥（brotherId）在私聊戳溪颜时她有反应。replyText=是否调模型说一句（真人感强、费一次 /chat）；pokeBack=是否真的戳回去（friend_poke，探活支持；失败自动降级为只回文字）。两者可独立开关，都关=关闭本功能。cooldownMs=冷却，防连戳刷屏。",
+    "enabled": true,
+    "brotherId": 10000,
+    "replyText": true,
+    "pokeBack": true,
+    "cooldownMs": 3000,
+    "prompt": "（旁白：哥哥刚刚在 QQ 上戳了戳你。真人被戳了会有反应——可以戳回去、可以装恼、可以撒娇，接着想一句很短的话回他，一两句就好，别解释「戳一戳是什么」、别提旁白。比如「干嘛戳我」「又戳」「……干嘛」。）"
+  },
+  "quote": {
+    "_comment": "方案⑤引用回复：私聊回复时引用哥哥本轮最后一条消息，像真人针对某一句回。只对私聊生效，群聊/主动续话/敷衍/语音条不引用。协议端不支持 CQ:reply 时自动降级为普通消息。enabled=false 关闭。",
+    "enabled": true
+  },
+  "voice": {
+    "_comment": "让溪颜在 QQ 发语音：复用 Coo gpt-sovits 的本地接口 9880。桌宠回复里写 [voice]要说的话[/voice] 即触发；合成失败自动降级为纯文字，不影响正常回复。换音色：哥哥私聊说「换成X的声音」或桌宠写 [voice:use X] 即切换，并写回 voice.voice。要新增可切换的音色，在 switchMap 里加「称呼: 音色名或id」（音色须先在 Coo 音色面板登记）。",
+    "enabled": true,
+    "ttsUrl": "http://127.0.0.1:9880",
+    "voice": "cv-mwt2la6d-0m6a",
+    "_voice_comment": "2026-11-23 17:35：默认音色由「希美」(cv-mwmc3nsd-y1k3) 改为「葱·训练」(cv-mwt2la6d-0m6a)。这是用葱中文音声微调训练出的权重版（cong-e12.ckpt + cong_e12_s444_l32.pth），挂在 Coo 音色库的「葱·训练」音色上；声纹相似度 0.907，与训练打分最优 e12 一致。要改回希美填 cv-mwmc3nsd-y1k3，改回零样本葱·嗔怪填 cong-tease-fix。",
+    "tailPadMs": 300,
+    "_tailPad_comment": "2026-11-23：补尾静音实验（300→500ms）对『尾字发闷』无效——SILK 往返实测尾字无损，问题在合成端语速衰减而非转码截尾。16:56 归零关闭。17:53 因QQ吞字重试，改回300。函数保留，随时可再用。",
+    "switchEnabled": true,
+    "switchMap": {
+      "卡提希娅": "卡提希娅",
+      "胡桃": "胡桃",
+      "葱": "葱",
+      "希美": "希美",
+      "洛琪希": "洛琪希",
+      "普瑞赛斯": "普瑞赛斯",
+      "默认": "xll",
+      "原声": "xll",
+      "葱·嗔怪": "cong-tease-fix",
+      "葱·训练": "cv-mwt2la6d-0m6a"
+    },
+    "timeoutMs": 120000,
+    "maxChars": 200,
+    "_maxChars_comment": "2026-11-23 17:05：语音台词字数上限 80→200（用户要求放开长度限制）。实测 44 字语音并未触发旧上限，放开后桌宠可说更长的台词。要收回改回 80。",
+    "allowGroups": false,
+    "speed": 0.85,
+    "_speed_comment": "2026-11-23：语速值。17:00 曾由 0.85→0.9 试解尾字发闷（实测 0.9 尾字收尾能量最高、SILK 后 3672），但用户听感无改善，17:24 按用户要求改回 0.85。桥单独传 speed 只影响溪颜，不改 Coo 全局（泡泡仍 0.77）。",
+    "seed": -1,
+    "_seed_comment": "2026-11-23 17:09：seed 13（固定）→ -1（每次重新采样）。实测固定 seed13 合成的句子尾字衰减快（收尾 RMS 掉到 229、整句 8.09s），换 -1 后尾字更平缓（924、整句 6.31s），疑为尾字发闷真凶。voice.mjs 里 seed>=0 才传，故 -1 时桥不传、由 gpt-sovits 用默认 -1 重采样。要恢复固定种子改回 13。"
+  },
+  "proactive": {
+    "_comment": "2026-11-20 真人感：私聊主动去掉准点感——实际等待 = idleMs/intervalMs + random(0,spreadMs)，即 5~30 分钟随机（spreadMs=1500000）。到点后仍由她自己 [skip] 决定说不说，所以是「想起你才说」。maxPerIdle=0 不限句、忽略省电开关；夜间静默 02:00–07:00 保留（2026-11-20 08:10 恢复，防止你睡着后她整夜自问自答）。要恢复准点 5 分钟把 spreadMs 设 0；要连夜间也发把 quietHours 改回 []，重启桥。",
+    "enabled": true,
+    "idleMs": 300000,
+    "intervalMs": 300000,
+    "spreadMs": 1500000,
+    "maxPerIdle": 0,
+    "respectFocusFlag": false,
+    "sleep": {
+      "idleMs": 300000,
+      "intervalMs": 300000,
+      "spreadMs": 1500000,
+      "maxPerIdle": 0,
+      "stateFile": "proactive-state.json",
+      "wakeUserWords": [
+        "醒醒",
+        "起床",
+        "别睡了",
+        "该起了",
+        "快醒",
+        "醒一醒",
+        "快起来",
+        "起来啦"
+      ]
+    },
+    "quietHours": [
+      2,
+      7
+    ],
+    "group": {
+      "_comment": "2026-11-20 群聊发言要限制：群内主动恢复节制节奏（35 分钟后首句、之后每 45 分钟、每轮最多 2 句；睡着更慢）。私聊主动仍是 30 秒不限句。另一道防刷屏闸门见 groupChat。",
+      "enabled": true,
+      "groups": [
+        20000
+      ],
+      "idleMs": 2100000,
+      "intervalMs": 2700000,
+      "maxPerIdle": 2,
+      "sleepIdleMs": 3600000,
+      "sleepIntervalMs": 3600000,
+      "sleepMaxPerIdle": 1,
+      "quietHours": [],
+      "prompt": "（旁白：这句会发到【三人群 20000】，哥哥和泡泡都看得见。QQ 群里安静了好一会儿，没有人说话，这是你自己在群里想说的一句话。只接着刚才群里聊到的地方往下说：补一句没说完的、忽然想起的小事、或者轻轻起个话头，跟泡泡搭句话也行。别开太突兀的新话题，别问「在吗」「还在吗」，别催人回，别重复刚说过的话，别把私聊里的事、称呼和亲昵话带进群；一两句，短，像顺手发出来的。）"
+    },
+    "prompt": "（旁白：这句只会发到【私聊】里，给哥哥一个人看。这一轮哥哥没有发任何新消息，你看到的每一句话都不是他刚说的。先分清三件事：①只有本轮新到、带【私聊｜这句会发回私聊】并以「哥哥：」开头的，才是他此刻亲口说的话——这种现在没有；②「私聊里最近这几句」只是让你找语气的旧对话，是今晚早些时候聊过的，不是刚说的；③【长期记忆】里「哥哥要你……」「你答应过……」「他记着……」这类，全是你记在本子上的旧事，不是他现在的要求，哪怕写着「今天记下」也不是今天刚说的。所以这一轮不要把任何一句旧话当成他刚说的去接、去回应、去承诺：不要说「我记着了」「你让我……」「别一个人扛」「想说什么就说什么」这种像是回答他的话——根本没有新的话需要你回答。这是给你自己想说一句的机会：说不说由你自己定，别为了说而说。想说就只说一句你自己此刻冒出来的小念头——忽然想起的、小声撒个娇的，别去续旧对话、别替旧记忆作答。群里刚聊过的任何话题、泡泡说过的任何话都不属于这里，绝对不要提、不要接、不要解释。别开新话题，别问「在吗」「还在吗」，别催他回，别重复刚说过的话。一两句，短，像顺手发出来的一句。若下面没有私聊近况，就只轻轻说一句想他，别硬接任何话题。要是这会儿没什么想说的、或觉得不该打扰他，就只回 [skip]，桥就不会发任何消息——你不出声也没关系。）"
+  },
+  "timeHint": {
+    "_comment": "每轮 /chat 末尾注入一行当前时间与使用规则，防止她拿对话里提到的钟点推算现在几点、越推越偏。enabled=false 可关闭；桥改动需重启才生效。",
+    "enabled": true
+  },
+  "appointments": {
+    "enabled": true,
+    "minMs": 10000,
+    "maxMs": 86400000,
+    "maxPending": 5,
+    "respectQuietHours": true,
+    "absolute": {
+      "enabled": true,
+      "maxMs": 691200000
+    },
+    "stateFile": "appointments.json",
+    "prompt": "（旁白：这句只会发到【私聊】里，给哥哥一个人看。现在到了你亲口答应哥哥的时间点——他之前说「{phrase}」，你答应过会在这个时辰来找他。原话里写的日期和钟点只是当时的说法，现在就是该赴约的那一刻；以系统给你的【当前时间】为准，别再拿原话里的钟点推算还差多少。别再等、别再说还差多久、也别解释为什么晚了，更别甩锅说时间自己跑了；就像准点赴约一样轻轻说一句：说你来了、打个招呼、或者顺着当时的话题接一句，带一点点撒娇也行。一两句，短，像真人打字。别问「在吗」「还在吗」，别提「定时器」「分钟」「后台」「桥」这些词，别把群里的事带进来。）"
+  },
+  "watchMode": {
+    "enabled": true,
+    "bypassQuietHours": true,
+    "lockTimeoutMs": 12000,
+    "lockPollMs": 2000,
+    "frameIntervalMs": 60000,
+    "autoStopMs": 7200000,
+    "minSpeakIntervalMs": 0,
+    "maxSpeakPerHour": 100000,
+    "changeThreshold": 10,
+    "blackMeanBelow": 10,
+    "whiteMeanAbove": 246,
+    "maxEdge": 1280,
+    "jpegQuality": 72,
+    "maxImageBytes": 600000,
+    "captureTimeoutMs": 15000,
+    "minWindowWidth": 320,
+    "minWindowHeight": 240,
+    "denyWindowTitles": [
+      "微信",
+      "WeChat",
+      "WorkBuddy",
+      "bridge.mjs",
+      "PowerShell",
+      "命令提示符",
+      "终端",
+      "任务管理器"
+    ],
+    "denyProcesses": [
+      "QQ",
+      "WeChat",
+      "WorkBuddy",
+      "powershell",
+      "cmd",
+      "WindowsTerminal"
+    ],
+    "prompt": {
+      "private": "【私聊｜只有你和哥哥两个人｜这句会发回私聊】\n（旁白：这是刚刚从哥哥屏幕上截到的一帧比赛画面，图就在下面，你自己能看见。哥哥这会儿没说话，是你看着画面想说的一句。只说你在这帧里真正看见的东西：场上动作、比分牌、特写、镜头变化，一两句，短，像看球时随口一说。看不清就说看不清，绝对不要编比分、队名、球员名，也不要说「我看到了图片」「收到截图」这类话。别问「在吗」，别催他回，别把群里的事、泡泡说过的话带进来。如果这一帧实在没什么值得说的，只回 [skip]，桥就不会发消息。）",
+      "group": "【三人群 {gid}｜看下面的 QQ 号认说话人｜这句会发回这个群】\n（旁白：这是刚刚从屏幕上截到的一帧比赛画面，图就在下面，你自己能看见。群里这会儿没人说话，是你看着画面想在群里说的一句。只说你在这帧里真正看见的东西，一两句，短，像看球时顺口发的一句。看不清就说看不清，绝对不要编比分、队名、球员名，也不要说「我看到了图片」。别开新话题，别问「在吗」，别把私聊里的事、称呼和亲昵话带进群。如果这一帧实在没什么值得说的，只回 [skip]。）"
+    }
+  },
+  "simulateSelfId": 10001,
+  "instance": {
+    "port": 7341
+  },
+  "log": {
+    "file": "logs/bridge.log",
+    "maxBytes": 5000000
+  },
+  "incomingImages": {
+    "enabled": true,
+    "groupsEnabled": true,
+    "facesEnabled": true,
+    "maxImageBytes": 600000,
+    "timeoutMs": 12000
+  },
+  "task": {
+    "enabled": false,
+    "_comment": "【2026-11-24 起关闭】任务通道已移交泡泡组，溪颜侧结案，enabled=false 后「任务：」口令不再拦消息、不落盘、不回 ack，聊天零影响。代码（task-bridge.mjs / task-notify.mjs）原样保留供泡泡复用，不要删。要恢复：改 true 并重启桥。原说明：方案①文件队列最小闭环。默认 false=完全不生效，聊天零影响。启用：改 true 并重启桥；回退：改回 false。哥哥私聊发「任务：xxx」→ 落 tasks/inbox → WorkBuddy 消费 → tasks/out → 用 node task-notify.mjs --send 回报。",
+    "privateOnly": true,
+    "allowedUsers": [
+      10000
+    ],
+    "prefixes": [
+      "任务：",
+      "任务:",
+      "帮我做：",
+      "帮我做:"
+    ],
+    "maxChars": 4000,
+    "ack": "收到啦，我去办，办好了回你。",
+    "ackOnEnqueue": true,
+    "dir": "tasks",
+    "reportHead": "（忙好了）"
+  },
+  "petState": {
+    "_comment": "【2026-11-24 01:22 启用】吃东西数值养成（方案2）。当前 enabled=true，已生效。回退：改 false 并重启桥（或置空 stateFile 只停注入）。两个数值按真实经过时间衰减（重启/关机不错乱），落盘 pet-state.json。她写 [想吃:XXX] 记成心愿食物（30分钟内有效），哥哥私聊说「喂你/给你买的/喂她」等口令投喂：饥饿下降、精力回升、吃到她自己挑的。hungerPerHour/energyPerHour 是每小时变化刻度(0-100)；feedHunger/feedEnergy 是投喂增量；feedCooldownMs 防连刷；hungryAt/starvingAt/tiredAt 是语气阈值。详见《吃东西-功能留档.md》。",
+    "enabled": true,
+    "stateFile": "pet-state.json",
+    "hungerPerHour": 6,
+    "energyPerHour": 4,
+    "feedHunger": -45,
+    "feedEnergy": 8,
+    "feedCooldownMs": 60000,
+    "cravingTtlMs": 1800000,
+    "hungryAt": 60,
+    "starvingAt": 85,
+    "tiredAt": 30
+  },
+  "webSearch": {
+    "_comment": "联网。她在回复里写 [查:关键词] 或 [天气:城市] 时，桥去查一次，把结果交回去让她说人话（一轮问答变成两次 /chat）。默认关=false 时标记原样剥离、行为与之前完全一致。搜索源：必应（国内可达、零 key）；天气走 wttr.in 一句话。百度解析保留在 web-search.mjs 里但默认不启用——实测几次请求后就会触发安全验证。",
+    "enabled": true,
+    "allowGroups": false,
+    "timeoutMs": 9000,
+    "maxResults": 5,
+    "budgetChars": 700,
+    "_engines_comment": "想换源时改这里，按顺序降级：bing-html / bing-rss / baidu。留空用默认 ['bing-html','bing-rss']。",
+    "engines": []
+  },
+  "image": {
+    "enabled": true,
+    "_comment": "方案①云端真生图（参考coo）。她在回复里写 [画:内容] 或 [画:内容|画风] 时，桥调 qwen-image 生成图、落盘、发到QQ。默认 false=完全不生效、标记原样剥离，聊天零影响。启用改 true 并重启桥；回退改回 false。API密钥从 coo 的 .env 读 apiKeyEnv，不写死在配置里。按张计费（实测约40秒/张）；群聊默认不画。",
+    "allowGroups": false,
+    "apiKeyEnv": "YOUR_CREDENTIAL_HERE",
+    "baseUrl": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+    "model": "qwen-image-3.0-pro",
+    "size": "1024x1024",
+    "quality": "medium",
+    "detail": "normal",
+    "timeoutMs": 180000,
+    "maxPromptChars": 240,
+    "outDir": "D:/dsh workplace/tools/dsh-pet-qq/generated",
+    "maxImageBytes": 4194304,
+    "ack": "好嘞，我画一下，稍等哈。",
+    "ackOnDraw": true
+  },
+  "douyin": {
+    "_comment": "【2026-11-24 新增】溪颜自己的抖音浏览模块（douyin-mode.mjs）。默认 enabled=false：模块加载但口令全不响应，聊天零影响。要启用：改 true 并重启桥。首次使用需要用户本人扫码登录（模块拉起登录页等待，storageState 落 .secret/douyin-state.json，不进日志/记忆/git）。评论和发动态默认 humanReview=true 走人审：先落 douyin-pending.json 待审清单，QQ 私聊发「抖音同意 编号」才真正提交；确认稳定后可自行改 false 放开自动执行。",
+    "enabled": true,
+    "humanReview": true,
+    "headless": true,
+    "intervalMs": 90000,
+    "jitterMs": 30000,
+    "autoStopMs": 3600000,
+    "loginTimeoutMs": 180000,
+    "maxCommentsPerHour": 5,
+    "maxPostsPerDay": 2,
+    "maxInteractionsPerSession": 20,
+    "maxContentChars": 120,
+    "minTopicIntervalMs": 180000,
+    "maxTopicsPerHour": 10,
+    "statePath": "D:/dsh workplace/tools/dsh-pet-qq/.secret/douyin-state.json",
+    "pendingFile": "douyin-pending.json",
+    "auditFile": "D:/dsh workplace/tools/dsh-pet-qq/logs/douyin-audit.log",
+    "viewportWidth": 1280,
+    "viewportHeight": 800,
+    "jpegQuality": 60,
+    "_comment_cowatch": "【2026-11-24 桌面共看】屏幕外可见窗口（页面能播、不抢焦点、不挡屏），扫码或说「抖音抬窗」才搬到眼前；共看每20秒一张分镜拼图、每小时上限20条。ownerDouyinName 留空则不@，填好抖音昵称后她写 [评@:内容] 才会在评论里@你（仍走人审）。",
+    "visibleWindow": true,
+    "windowParkOffscreen": true,
+    "windowPosition": "120,80",
+    "coWatch": true,
+    "_comment_plugin": "【2026-11-24 共用浏览器】插件端点活着时，桥不再自己开抖音，整套操作代理到 DSH 插件那一个浏览器（她看的=你收到的，不会再出现'他看不到我看到的画面'）。preferPluginBrowser=false 可强制退回桥自己开浏览器。coWatchAutoNext=false → 共看就是'一起看同一条'，不自动翻页；要以前的幻灯片式刷法改成 true。",
+    "preferPluginBrowser": true,
+    "coWatchAutoNext": false,
+    "lastFrameMaxAgeMs": 90000,
+    "coWatchIntervalMs": 20000,
+    "coWatchJitterMs": 5000,
+    "coWatchMaxPerHour": 20,
+    "coWatchFrames": 1,
+    "coWatchStitch": false,
+    "coWatchFrameGapMs": 600,
+    "coWatchCellWidth": 480,
+    "coWatchCellHeight": 300,
+    "coWatchDedupThreshold": 4,
+    "shotDir": "D:/dsh workplace/tools/dsh-pet-qq/tmp/douyin-shots",
+    "maxScreenshotBase64": 900000,
+    "ownerDouyinName": "",
+    "browserPath": "D:/Quark/7.4.7.1036/quark.exe"
+  }
+}
